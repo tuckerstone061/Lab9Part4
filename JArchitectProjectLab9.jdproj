@@ -1,0 +1,2413 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<NDepend AppName="Lab9Part4" Platform="DotNet">
+  <OutputDir KeepHistoric="True" KeepXmlFiles="False">/Users/tucker.stone061/Dropbox/Comp350/Lab09/JArchitectOut</OutputDir>
+  <Assemblies>
+    <Name>/Users/tucker.stone061/Desktop/BunnyHunt(1)-2.jar</Name>
+  </Assemblies>
+  <FrameworkAssemblies />
+  <Dirs>
+    <Dir>/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Classes</Dir>
+    <Dir>/Users/tucker.stone061/Desktop</Dir>
+  </Dirs>
+  <Report Kind="0" SectionsEnabled="45055" XslPath="" Flags="64512" />
+  <BuildComparisonSetting ProjectMode="DontCompare" BuildMode="MostRecentAnalysisResultAvailable" ProjectFileToCompareWith="" BuildFileToCompareWith="" NDaysAgo="1" FocusOnRecentRulesViolations="False" />
+  <BaselineInUISetting ProjectMode="DontCompare" BuildMode="MostRecentAnalysisResultAvailable" ProjectFileToCompareWith="" BuildFileToCompareWith="" NDaysAgo="1" FocusOnRecentRulesViolations="False" />
+  <CoverageFiles UncoverableAttribute="" />
+  <Plugins />
+  <TrendMetrics UseCustomLog="False" LogRecurrence="3" LogLabel="2" UseCustomDir="False" CustomDir="">
+    <Chart Name="Lines of Code" ShowInReport="True">
+      <Serie MetricName="# Lines of Code" MetricUnit="Loc" Color="#FF00BFFF" ChartType="Line" ScaleExp="0" />
+      <Serie MetricName="# Lines of Code Covered" MetricUnit="Loc" Color="#FF32CD32" ChartType="Area" ScaleExp="0" />
+      <Serie MetricName="# Lines of Code (NotMyCode)" MetricUnit="Loc" Color="#FFA9A9A9" ChartType="Area" ScaleExp="0" />
+      <Serie MetricName="# Lines of Comments" MetricUnit="Lines" Color="#FF008000" ChartType="Line" ScaleExp="0" />
+    </Chart>
+    <Chart Name="Rules Violated" ShowInReport="True">
+      <Serie MetricName="# Rules" MetricUnit="Rules" Color="#FF66CDAA" ChartType="Line" ScaleExp="0" />
+      <Serie MetricName="# Rules Violated" MetricUnit="Rules" Color="#FFFF8C00" ChartType="Area" ScaleExp="0" />
+      <Serie MetricName="# Critical Rules Violated" MetricUnit="Rules" Color="#FFFF0000" ChartType="Area" ScaleExp="0" />
+    </Chart>
+    <Chart Name="Rules Violations" ShowInReport="True">
+      <Serie MetricName="# Rules Violations" MetricUnit="Violations" Color="#FFFF8C00" ChartType="Area" ScaleExp="0" />
+      <Serie MetricName="# Critical Rules Violations" MetricUnit="Violations" Color="#FFFF0000" ChartType="Area" ScaleExp="0" />
+    </Chart>
+    <Chart Name="Percentage Coverage by Tests" ShowInReport="True">
+      <Serie MetricName="Percentage Code Coverage" MetricUnit="%" Color="#FF32CD32" ChartType="Area" ScaleExp="0" />
+    </Chart>
+    <Chart Name="Max" ShowInReport="True">
+      <Serie MetricName="Max BC Cyclomatic Complexity for Methods" MetricUnit="Paths" Color="#FFFF0000" ChartType="Line" ScaleExp="0" />
+      <Serie MetricName="Max # Lines of Code for Methods (JustMyCode)" MetricUnit="LoC" Color="#FF0000FF" ChartType="Line" ScaleExp="0" />
+      <Serie MetricName="Max # of Methods for Types" MetricUnit="Methods" Color="#FF32CD32" ChartType="Line" ScaleExp="0" />
+      <Serie MetricName="Max BC Nesting Depth for Methods" MetricUnit="Scopes" Color="#FFFFD700" ChartType="Line" ScaleExp="0" />
+    </Chart>
+    <Chart Name="Average" ShowInReport="True">
+      <Serie MetricName="Average BC Cyclomatic Complexity for Methods" MetricUnit="Paths" Color="#FFFF0000" ChartType="Line" ScaleExp="0" />
+      <Serie MetricName="Average # Lines of Code for Methods" MetricUnit="LoC" Color="#FF0000FF" ChartType="Line" ScaleExp="0" />
+      <Serie MetricName="Average # Methods for Types" MetricUnit="Methods" Color="#FF32CD32" ChartType="Line" ScaleExp="0" />
+      <Serie MetricName="Average BC Nesting Depth for Methods" MetricUnit="Scopes" Color="#FFFFD700" ChartType="Line" ScaleExp="0" />
+    </Chart>
+    <Chart Name="Third-Party Usage" ShowInReport="True">
+      <Serie MetricName="# Third-Party Types Used" MetricUnit="Types" Color="#FF0000FF" ChartType="Line" ScaleExp="0" />
+      <Serie MetricName="# Third-Party Methods Used" MetricUnit="Methods" Color="#FFFF0000" ChartType="Line" ScaleExp="0" />
+      <Serie MetricName="# Third-Party Projects Used" MetricUnit="Projects" Color="#FF646464" ChartType="Line" ScaleExp="1" />
+      <Serie MetricName="# Third-Party Packages Used" MetricUnit="PACKAGES" Color="#FF32CD32" ChartType="Line" ScaleExp="1" />
+      <Serie MetricName="# Third-Party Fields Used" MetricUnit="Fields" Color="#FFFFD700" ChartType="Line" ScaleExp="1" />
+    </Chart>
+  </TrendMetrics>
+  <SourceFileRebasing FromPath="" ToPath="" /><Queries>
+    <Group Name="Code Quality" Active="True" ShownInReport="False">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Types too big - critical</Name>
+warnif count > 0 from t in JustMyCode.Types where 
+   t.NbLinesOfCode > 500 ||
+   t.NbBCInstructions > 3000
+   orderby t.NbLinesOfCode descending
+select new { t, t.NbLinesOfCode, t.NbBCInstructions,
+                t.Methods, t.Fields }
+
+// Types where NbLinesOfCode > 500 are extremely complex 
+// and should be split in a smaller group of types. 
+// See the definition of the NbLinesOfCode metric here 
+// http://www.jarchitect.com/Metrics#NbLinesOfCode
+
+// In average, a line of code is compiled to around
+// 6 BC instructions. This is why the code metric
+// NbBCInstructions is used here, in case the 
+// code metric NbLinesOfCode is un-available because
+// of missing code source files.
+// See the definition of the NbBCInstructions metric here 
+// http://www.jarchitect.com/Metrics#NbBCInstructions
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Methods too complex - critical</Name>
+warnif count > 0 from m in JustMyCode.Methods where 
+  m.BCCyclomaticComplexity > 40 && 
+  m.BCNestingDepth > 5
+  orderby m.BCCyclomaticComplexity descending,
+          m.BCNestingDepth descending
+select new { m, m.BCCyclomaticComplexity, m.BCNestingDepth }
+
+// Methods with BCCyclomaticComplexity > 40 and BCNestingDepth  > 4
+// are really too complex and should be split 
+// in smaller methods, or even types.
+// See the definition of the BCCyclomaticComplexity metric here 
+// http://www.jarchitect.com/Metrics#ILCC
+// See the definition of the BCNestingDepth metric here 
+// http://www.jarchitect.com/Metrics#BCNestingDepth]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Methods with too many parameters - critical</Name>
+warnif count > 0 from m in JustMyCode.Methods where 
+  m.NbParameters > 8
+  orderby m.NbParameters descending
+select new { m, m.NbParameters }
+
+// Methods with more than 8 parameters might be painful to call 
+// and might degrade performance. You should prefer using 
+// additional properties/fields to the declaring type to 
+// handle numerous states. Another alternative is to provide 
+// a class or structure dedicated to handle arguments passing 
+// (for example see the class System.Diagnostics.ProcessStartInfo 
+//  and the method System.Diagnostics.Process.Start(ProcessStartInfo))
+//  See the definition of the NbParameters metric here 
+// http://www.jarchitect.com/Metrics#NbParameters
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Quick summary of methods to refactor</Name>
+warnif count > 0 from m in JustMyCode.Methods where 
+                                    // Code Metrics' definitions
+  m.NbLinesOfCode > 30 ||           // http://www.jarchitect.com/Metrics#NbLinesOfCode
+  m.NbBCInstructions > 200 ||       // http://www.jarchitect.com/Metrics#NbBCInstructions
+  m.CyclomaticComplexity > 20 ||    // http://www.jarchitect.com/Metrics#CC
+  m.BCCyclomaticComplexity > 50 ||  // http://www.jarchitect.com/Metrics#ILCC
+  m.BCNestingDepth > 5 ||           // http://www.jarchitect.com/Metrics#BCNestingDepth
+  m.NbParameters > 5 ||             // http://www.jarchitect.com/Metrics#NbParameters
+  m.NbVariables > 8 ||              // http://www.jarchitect.com/Metrics#NbVariables
+  m.NbOverloads > 6                 // http://www.jarchitect.com/Metrics#NbOverloads
+
+select new { m, m.NbLinesOfCode, m.NbBCInstructions, m.CyclomaticComplexity, 
+             m.BCCyclomaticComplexity, m.BCNestingDepth, 
+             m.NbParameters, m.NbVariables, m.NbOverloads } ]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Methods too big</Name>
+warnif count > 0 from m in JustMyCode.Methods where 
+   m.NbLinesOfCode > 30 ||
+   m.NbBCInstructions > 200
+   orderby m.NbLinesOfCode descending,
+           m.NbBCInstructions descending
+select new { m, m.NbLinesOfCode, m.NbBCInstructions }
+
+// Methods where NbLinesOfCode > 30 or NbBCInstructions > 200
+// are extremely complex and should be split in smaller methods.
+// See the definition of the NbLinesOfCode metric here 
+// http://www.jarchitect.com/Metrics#NbLinesOfCode]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Methods too complex</Name>
+warnif count > 0 from m in JustMyCode.Methods where 
+  m.CyclomaticComplexity > 20 ||
+  m.BCCyclomaticComplexity > 40 ||
+  m.BCNestingDepth > 5
+  orderby m.CyclomaticComplexity descending,
+          m.BCCyclomaticComplexity descending,
+          m.BCNestingDepth descending
+select new { m, m.CyclomaticComplexity, 
+                m.BCCyclomaticComplexity,
+                m.BCNestingDepth  }
+
+// Methods where CyclomaticComplexity > 20 
+// or BCCyclomaticComplexity > 40
+// or BCNestingDepth > 4
+// are hard to understand and maintain
+// and should be split in smaller methods.
+// See the definition of the complexity metrics here:
+// http://www.jarchitect.com/Metrics#CC
+// http://www.jarchitect.com/Metrics#ILCC
+// http://www.jarchitect.com/Metrics#BCNestingDepth]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Methods potentially poorly commented</Name>
+warnif count > 0 from m in JustMyCode.Methods where 
+  m.PercentageComment < 20 && 
+  m.NbLinesOfCode > 20  
+  orderby m.PercentageComment ascending
+select new { m, m.PercentageComment, m.NbLinesOfCode, m.NbLinesOfComment }
+
+// Methods where %Comment < 20 and that have 
+// at least 20 lines of code might need to be more commented.
+// See the definition of the Comments metric here 
+// http://www.jarchitect.com/Metrics#PercentageComment
+// http://www.jarchitect.com/Metrics#NbLinesOfComment ]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Methods with too many parameters</Name>
+warnif count > 0 from m in JustMyCode.Methods where 
+  m.NbParameters > 5 
+  orderby m.NbParameters descending
+select new { m, m.NbParameters }
+
+// Methods where NbParameters > 5 might be painful to call 
+// and might degrade performance. You should prefer using 
+// additional properties/fields to the declaring type to 
+// handle numerous states. Another alternative is to provide 
+// a class or structure dedicated to handle arguments passing 
+// (for example see the class System.Diagnostics.ProcessStartInfo 
+// and the method System.Diagnostics.Process.Start(ProcessStartInfo))
+// See the definition of the NbParameters metric here 
+// http://www.jarchitect.com/Metrics#NbParameters]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Methods with too many local variables</Name>
+warnif count > 0 from m in JustMyCode.Methods where 
+  m.NbVariables > 15 
+  orderby m.NbVariables descending
+select new { m, m.NbVariables }
+
+// Methods where NbVariables > 8 are hard to understand and maintain.
+// Methods where NbVariables > 15 are extremely complex 
+// and should be split in smaller methods.
+// See the definition of the Nbvariables metric here 
+// http://www.jarchitect.com/Metrics#Nbvariables]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Methods with too many overloads</Name>
+warnif count > 0 from m in JustMyCode.Methods where 
+  m.NbOverloads > 6 
+  orderby m.NbOverloads descending
+select new { m, m.NbOverloads }
+
+// Methods where NbOverloads > 6 might 
+// be a problem to maintain and provoke higher coupling 
+// than necessary. 
+// This might also reveal a potential misused of the 
+// C# and VB.NET language that since C#3 and VB9 support 
+// object initialization. This feature helps reducing the number 
+// of constructors of a class.
+// See the definition of the NbOverloads metric here 
+// http://www.jarchitect.com/Metrics#NbOverloads]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Types with too many methods</Name>
+warnif count > 0 from t in JustMyCode.Types where 
+  t.Methods.Count() > 20 
+  orderby t.Methods.Count() descending
+select new { t, t.InstanceMethods, t.StaticMethods }
+
+// Types where Methods.Count() > 20 might be hard to 
+// understand and maintain 
+// but there might be cases where it is relevant 
+// to have a high number of methods. 
+// For example, the System.Windows.Forms.DataGridView 
+// standard class has more than 1000 methods.
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Types with too many fields</Name>
+warnif count > 0 from t in JustMyCode.Types where 
+  t.Fields.Count() > 20 && 
+  !t.IsEnumeration 
+  orderby t.Fields.Count() descending
+select new { t, t.InstanceFields, t.StaticFields, t.SizeOfInst }
+
+// Types where Fields.Count() > 20 and not IsEnumeration 
+// might be hard to understand and maintain 
+// but there might be cases where it is relevant 
+// to have a high number of fields. 
+// For example, the System.Windows.Forms.Control 
+// standard class has more than 200 fields.]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Types with poor cohesion</Name>
+warnif count > 0 from t in JustMyCode.Types where 
+  (t.LCOM > 0.8 || t.LCOMHS > 0.95) && 
+  t.NbFields > 10 && 
+  t.NbMethods >10 
+  orderby t.LCOM descending, t.LCOMHS descending
+select new { t, t.LCOM, t.LCOMHS, 
+                t.NbMethods, t.NbFields }
+
+// Types where LCOM > 0.8 and NbFields > 10 
+// and NbMethods >10 might be problematic. 
+// However, it is very hard to avoid such 
+// non-cohesive types. The LCOMHS metric
+// is often considered as more efficient to 
+// detect non-cohesive types.
+// See the definition of the LCOM metric here 
+// http://www.jarchitect.com/Metrics#LCOM]]></Query>
+    </Group>
+    <Group Name="Code Quality Regression" Active="True" ShownInReport="False">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>From now, all methods added or refactored should respect basic quality principles</Name>
+warnif count > 0 from m in JustMyCode.Methods where
+
+// *** Only new or modified methods since Baseline for Comparison ***
+ (m.WasAdded() || m.CodeWasChanged()) &&
+ 
+// Low Quality methods// Metrics' definitions
+(  m.NbLinesOfCode > 30 ||          // http://www.jarchitect.com/Metrics#NbLinesOfCode
+   m.NbBCInstructions > 200 ||      // http://www.jarchitect.com/Metrics#NbBCInstructions
+   m.CyclomaticComplexity > 20 ||   // http://www.jarchitect.com/Metrics#CC
+   m.BCCyclomaticComplexity > 50 || // http://www.jarchitect.com/Metrics#ILCC
+   m.BCNestingDepth > 4 ||          // http://www.jarchitect.com/Metrics#BCNestingDepth
+   m.NbParameters > 5 ||            // http://www.jarchitect.com/Metrics#NbParameters
+   m.NbVariables > 8 ||             // http://www.jarchitect.com/Metrics#NbVariables
+   m.NbOverloads > 6 )
+select new { m, m.NbLinesOfCode, m.NbBCInstructions, m.CyclomaticComplexity, 
+             m.BCCyclomaticComplexity, m.BCNestingDepth, 
+             m.NbParameters, m.NbVariables, m.NbOverloads }  // http://www.jarchitect.com/Metrics#NbOverloads
+
+
+// This rule warns if a method with
+// low-quality has been added or refactored.
+// With NDepend and such rule, you can
+// Ensure Quality From Now! as explained here:
+// http://codebetter.com/blogs/patricksmacchia/archive/2008/01/01/ensure-the-quality-of-the-code-that-will-be-developed-this-year
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>From now, all types added or refactored should respect basic quality principles</Name>
+warnif count > 0 from t in JustMyCode.Types where
+
+// *** Only match new or modified types since Baseline for Comparison ***
+(t.WasAdded() || t.CodeWasChanged()) &&
+
+// Eliminate interfaces, enumerations or types only with constant fields
+// by making sure we are matching type with code.
+t.NbLinesOfCode > 10 &&
+
+// Low Quality types     Metrics' definitions are available here:
+//     http://www.jarchitect.com/Metrics#MetricsOnTypes
+(  // Types with too many methods
+   t.NbMethods > 20 ||
+
+   // Types with too many fields
+   t.NbFields > 20 ||
+
+   // Complex Types that use more than 50 other types
+   t.NbTypesUsed > 50
+)
+select new { t, t.Methods, t.Fields, t.TypesUsed }
+
+
+// This rule warns if a type with
+// low-quality has been added or refactored.
+// With JArchitect and such rule, you can
+// Ensure Quality From Now! as explained here:
+// http://codebetter.com/blogs/patricksmacchia/archive/2008/01/01/ensure-the-quality-of-the-code-that-will-be-developed-this-year
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>From now, all types added or refactored should be 100% covered by tests</Name>
+warnif count > 0 from t in JustMyCode.Types where
+
+  // Match methods new or modified since Baseline for Comparison...
+  (t.WasAdded() || t.CodeWasChanged()) &&
+
+  // ...that are not 100% covered by tests
+  t.PercentageCoverage < 100
+
+  let methodsCulprit = t.Methods.Where(m => m.PercentageCoverage < 100)
+
+select new { t, t.PercentageCoverage, methodsCulprit }
+
+// Having types 100% covered by tests is a good idea because 
+// the small portion of code hard to cover, is also the 
+// portion of code that is the most likely to contain bugs.]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid decreasing code coverage by tests of types</Name>
+// To visualize changes in code, right-click a matched type and select:
+//  - Compare older and newer versions of source file
+//  - Compare older and newer versions disassembled with Reflector
+
+warnif count > 0 
+from t in JustMyCode.Types where
+  t.IsPresentInBothBuilds() &&
+  t.PercentageCoverage < t.OlderVersion().PercentageCoverage
+
+select new { t,
+    OldCov = t.OlderVersion().PercentageCoverage,
+    NewCov = t.PercentageCoverage,
+    OldLoc = t.OlderVersion().NbLinesOfCode,
+    NewLoc = t.NbLinesOfCode,
+}
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Types that used to be 100% covered but not anymore</Name>
+warnif count > 0
+from t in JustMyCode.Types where 
+   t.IsPresentInBothBuilds() &&
+   t.OlderVersion().PercentageCoverage == 100 &&
+   t.PercentageCoverage < 100
+let culpritMethods = t.Methods.Where(m => m.PercentageCoverage < 100)
+select new {t, t.PercentageCoverage, culpritMethods }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid making complex methods even more complex (Source CC)</Name>
+// To visualize changes in code, right-click a matched method and select:
+//  - Compare older and newer versions of source file
+//  - Compare older and newer versions disassembled with Reflector
+
+warnif count > 0 
+from m in JustMyCode.Methods where
+ !m.IsAbstract &&
+  m.IsPresentInBothBuilds() &&
+  m.CodeWasChanged()
+
+let oldCC = m.OlderVersion().CyclomaticComplexity
+where oldCC > 6 && m.CyclomaticComplexity > oldCC 
+
+select new { m,
+    oldCC ,
+    newCC = m.CyclomaticComplexity ,
+    oldLoc = m.OlderVersion().NbLinesOfCode,
+    newLoc = m.NbLinesOfCode,
+}
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid making complex methods even more complex (BC CC)</Name>
+// To visualize changes in code, right-click a matched method and select:
+//  - Compare older and newer versions of source file
+//  - Compare older and newer versions disassembled with Reflector
+
+warnif count > 0 
+from m in JustMyCode.Methods where
+ !m.IsAbstract &&
+  m.IsPresentInBothBuilds() &&
+  m.CodeWasChanged()
+
+let oldCC = m.OlderVersion().BCCyclomaticComplexity
+where oldCC > 10 && m.BCCyclomaticComplexity > oldCC 
+
+select new { m,
+    oldCC ,
+    newCC = m.BCCyclomaticComplexity ,
+    oldLoc = m.OlderVersion().NbLinesOfCode,
+    newLoc = m.NbLinesOfCode,
+}
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid making large methods even larger</Name>
+// To visualize changes in code, right-click a matched method and select:
+//  - Compare older and newer versions of source file
+//  - Compare older and newer versions disassembled with Reflector
+
+warnif count > 0 
+from m in JustMyCode.Methods where
+ !m.IsAbstract &&
+  m.IsPresentInBothBuilds() &&
+  m.CodeWasChanged() &&
+ // Eliminate constructors from match, since they get larger
+ // as soons as some fields initialization are added.
+ !m.IsConstructor &&
+ !m.IsClassConstructor
+
+let oldLoc = m.OlderVersion().NbLinesOfCode
+where oldLoc > 15 && m.NbLinesOfCode > oldLoc
+
+select new { m,
+    oldLoc,
+    newLoc = m.NbLinesOfCode,
+}
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid adding methods to a type that already had many methods</Name>
+// To visualize changes in code, right-click a matched type and select:
+//  - Compare older and newer versions of source file
+//  - Compare older and newer versions disassembled with Reflector
+
+warnif count > 0 
+from t in JustMyCode.Types where
+  t.IsPresentInBothBuilds() &&
+  t.Methods.Count() > t.OlderVersion().Methods.Count() &&
+  t.OlderVersion().Methods.Count() > 10
+
+let newMethods = t.Methods.Where(m => m.WasAdded())
+let removedMethods = t.OlderVersion().Methods.Where(m2 => m2.WasRemoved())
+
+select new { t,
+             oldNbMethods = t.OlderVersion().NbMethods,
+             newNbMethods = t.NbMethods,
+             newMethods,
+             removedMethods  }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[//<Name>Avoid transforming an immutable type into a mutable one</Name>
+// Users of an immutable type often rely on the fact that the type is immutable.
+// If an immutable type becomes mutable, there are chances that this will break its users.
+warnif count > 0
+from t in Application.Types where
+   t.IsPresentInBothBuilds() &&
+   t.OlderVersion().IsImmutable &&
+  !t.IsImmutable && 
+  // Don't take account of immutable types transformed into static types (not deemed as immtable)
+  !t.IsStatic
+let culpritFields = t.Fields.Where(f => f.IsImmutable)
+select new {t, culpritFields }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid transforming an immutable field into a mutable one</Name>
+// Users of an immutable field often rely on the fact that the type is immutable.
+// If an immutable field becomes mutable, there are chances that this will break its users.
+warnif count > 0
+from f in Application.Fields where 
+   f.IsPresentInBothBuilds() &&
+   f.OlderVersion().IsImmutable &&
+  !f.IsImmutable 
+select f]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid adding instance fields to a type that already had many instance fields</Name>
+// To visualize changes in code, right-click a matched type and select:
+//  - Compare older and newer versions of source file
+//  - Compare older and newer versions disassembled with Reflector
+
+warnif count > 0 
+from t in JustMyCode.Types where
+  t.IsPresentInBothBuilds() &&
+ !t.IsStatic
+
+let oldNbInstanceFields = t.OlderVersion().InstanceFields
+let newNbInstanceFields = t.InstanceFields
+where
+  newNbInstanceFields.Count() > oldNbInstanceFields .Count() &&
+  oldNbInstanceFields.Count() > 6
+
+let newInstanceFields = t.InstanceFields.Where(f => f.WasAdded())
+
+select new { t,
+             oldCount = oldNbInstanceFields.Count() ,
+             newCount = newNbInstanceFields.Count() ,
+             newInstanceFields }]]></Query>
+    </Group>
+    <Group Name="Object Oriented Design" Active="True" ShownInReport="True">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Base class should not use derivatives</Name>
+warnif count > 0 
+from baseClass in JustMyCode.Types
+where baseClass.IsClass && baseClass.NbChildren > 0 // <-- for optimization!
+let derivedClassesUsed = baseClass.DerivedTypes.UsedBy(baseClass)
+where derivedClassesUsed.Count() > 0
+select new { baseClass, derivedClassesUsed }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Class shouldn't be too deep in inheritance tree</Name>
+warnif count > 0 from t in JustMyCode.Types 
+where t.IsClass
+let baseClasses = t.BaseClasses.ExceptThirdParty()
+
+// Warn for classes with 3 or more base classes.
+// Notice that we don't count third-party classes 
+// because this rule concerns your code design,
+// not third-party libraries consumed design.
+where baseClasses.Count() >= 3
+
+select new { t, baseClasses, 
+                // The metric value DepthOfInheritance takes account
+                // of third-party base classes
+                t.DepthOfInheritance } 
+
+// Branches too long in the derivation should be avoided.
+// See the definition of the DepthOfInheritance metric here 
+// http://www.jarchitect.com/Metrics#DIT
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Class with no descendant should be final if possible</Name>
+warnif count > 0 from t in JustMyCode.Types where 
+  t.IsClass && 
+  t.NbChildren ==0 && 
+ !t.IsFinal && 
+ !t.IsStatic 
+  // && !t.IsPublic <-- You might want to add this condition 
+  //                    if you are developping a framework
+  //                    with classes that are intended to be 
+  //                    sub-classed by your clients.
+  orderby t.NbLinesOfCode descending
+select new { t, t.NbLinesOfCode }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[//<Name>Avoid the Singleton pattern</Name>
+warnif count > 0
+from t in Application.Types
+where !t.IsStatic && !t.IsAbstract && t.IsClass 
+
+// All ctors of a singleton are private
+where t.Constructors.Where(ctor => !ctor.IsPrivate).Count() == 0
+
+// A singleton contains one static field of its parent type, to reference the unique instance
+let staticFieldInstances = t.StaticFields.WithFieldType(t)
+where staticFieldInstances.Count() == 1
+select new { t, staticFieldInstance = staticFieldInstances.First() }
+
+// The Singleton pattern consists in syntactically enforcing that a class 
+// has just one unique instance.
+// At first glance, this pattern looks appealing and it is widely used.
+// However, we discourage you from using singleton classes because experience
+// shows that singletons often result in less testable and less maintainable code.
+// More details available in these discussions:
+//  http://codebetter.com/patricksmacchia/2011/05/04/back-to-basics-usage-of-static-members/
+//  http://adamschepis.com/blog/2011/05/02/im-adam-and-im-a-recovering-singleton-addict/
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Don't assign static fields from instance methods</Name>
+// Assigning static fields from instance methods leads to
+// poorly maintainable and non thread-safe code.
+// It is advised to assign static fields inline or from class constructor.
+warnif count > 0
+from f in Application.Fields where 
+  f.IsStatic &&
+ !f.IsLiteral &&
+ !f.IsInitOnly &&
+ !f.IsGeneratedByCompiler &&
+  // Contract API define such a insideContractEvaluation static field
+  f.Name != "insideContractEvaluation"
+let assignedBy = f.MethodsAssigningMe.Where(m => !m.IsStatic)
+where assignedBy .Count() > 0
+select new { f, assignedBy }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid empty interfaces</Name>
+warnif count > 0 from t in JustMyCode.Types where 
+  t.IsInterface && 
+  t.NbMethods == 0
+select new { t, t.TypesThatImplementMe }
+
+// Interfaces define members that provide a behavior 
+// or usage contract. The functionality described by 
+// the interface can be adopted by any type, 
+// regardless of where the type appears in the 
+// inheritance hierarchy. A type implements an 
+// interface by providing implementations for the 
+// interface's members. An empty interface does not 
+// define any members, and as such, does not define 
+// a contract that can be implemented.
+
+// If your design includes empty interfaces that 
+// types are expected to implement, you are probably 
+// using an interface as a marker, or a way of 
+// identifying a group of types. If this identification 
+// will occur at runtime, the correct way to accomplish
+// this is to use a custom attribute. Use the presence 
+// or absence of the attribute, or the attribute's 
+// properties, to identify the target types. If the 
+// identification must occurs at compile time, then using 
+// an empty interface is acceptable.]]></Query>
+    </Group>
+    <Group Name="Design" Active="True" ShownInReport="False">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid packages with few types</Name>
+warnif count > 0 from n in JustMyCode.Packages 
+let types = n.ChildTypes.Where(t => !t.IsGeneratedByCompiler)
+where 
+  types.Count() < 5 
+  orderby types.Count() ascending
+select new { n, types } 
+
+// Make sure that there is a logical organization 
+// to each of your packages, and that there is a 
+// valid reason for putting types in a sparsely 
+// populated package. Packages should contain 
+// types that are used together in most scenarios. 
+// When their applications are mutually exclusive, 
+// types should be located in separate packages]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Nested types should not be visible</Name>
+warnif count > 0 from t in JustMyCode.Types where 
+  t.IsNested && 
+ !t.IsGeneratedByCompiler &&
+ !t.IsPrivate 
+select new { t, t.NbLinesOfCode, t.Visibility } 
+
+
+// A nested type is a type declared within the 
+// scope of another type. Nested types are useful 
+// for encapsulating private implementation details 
+// of the containing type. Used for this purpose, 
+// nested types should not be externally visible. 
+// Do not use externally visible nested types for 
+// logical grouping or to avoid name collisions; 
+// instead, use packages.]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Instances size shouldn't be too big</Name>
+warnif count > 0 from t in JustMyCode.Types where 
+  t.SizeOfInst > 64 
+  orderby t.SizeOfInst descending
+select new { t, t.SizeOfInst, t.InstanceFields }
+
+// Types where SizeOfInst > 64 might degrade performance 
+// (depending on the number of instances created at runtime) 
+// and might be hard to maintain. However it is not a rule 
+// since sometime there is no alternative (the size of 
+// instances of the System.Net.NetworkInformation.SystemIcmpV6Statistics 
+// standard class is 2064 bytes).
+// Notice that a class with a large SizeOfInst value
+// doesn't necessarily have a lot of instance fields.
+// It might derive from a class with a large SizeOfInst value.
+// See the definition of the SizeOfInst metric here 
+// http://www.jarchitect.com/Metrics#SizeOfInst]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Don't use obsolete types, methods or fields</Name>   
+warnif count > 0
+let obsoleteTypes = Types.Where(t => t.IsObsolete)
+let obsoleteMethods = Methods.Where(m2 => m2.IsObsolete).ToHashSet()
+let obsoleteFields = Fields.Where(f => f.IsObsolete)
+
+from m in JustMyCode.Methods.UsingAny(obsoleteTypes).Union(
+          JustMyCode.Methods.UsingAny(obsoleteMethods)).Union(
+          JustMyCode.Methods.UsingAny(obsoleteFields))
+let obsoleteTypesUsed = obsoleteTypes.UsedBy(m)
+
+// Optimization: MethodsCalled + Intersect() is faster than using obsoleteMethods.UsedBy()
+let obsoleteMethodsUsed = m.MethodsCalled.Intersect(obsoleteMethods)
+let obsoleteFieldsUsed = obsoleteFields.UsedBy(m)
+select new { m, obsoleteTypesUsed, obsoleteMethodsUsed, obsoleteFieldsUsed }]]></Query>
+    </Group>
+    <Group Name="Architecture and Layering" Active="True" ShownInReport="False">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid packages mutually dependent</Name>
+warnif count > 0
+// Foreach pair of package mutually dependent, this rule lists pairs.
+// The pair { first, second } is formatted to show that first package shouldn't use the second package.
+// The first/second order is inferred from the number of types used by each other.
+// The first package is using less types of the second.
+// It means that the first package is certainly at a lower level in the architecture, than the second.
+//
+// To explore the coupling between two packages mutually dependent:
+//  1) export the first package to the vertical header of the dependency matrix
+//  2) export the second package to the horizontal header of the dependency matrix
+//  3) double-click the black cell
+//  4) in the matrix command bar, click the button: Remove empty Row(s) en Column(s)
+// At this point, the dependency matrix shows types involved into the coupling.
+//
+// Following this rule is useful to avoid packages dependency cycles.
+// More on this in our white books relative to partitionning code.
+// http://www.jarchitect.com/WhiteBooks
+
+
+// Optimization: restreint application projects set
+// If some packages are mutually dependent
+//  - They must be declared in the same project
+//  - The parent project must ContainsPackageDependencyCycle
+from project in Application.Projects.Where(a => a.ContainsPackageDependencyCycle != null && a.ContainsPackageDependencyCycle.Value)
+
+// hashset is used to avoid reporting both A <-> B and B <-> A
+let hashset = new HashSet<IPackage>()
+
+// Optimization: restreint packages set
+// If a package doesn't have a Level value, it must be in a dependency cycle
+// or it must be using directly or indirectly a dependency cycle.
+let packagesSuspect = project.ChildPackages.Where(n => n.Level == null)
+
+from nA in packagesSuspect
+
+// Select PACKAGES mutually dependent with nA
+let unused = hashset.Add(nA) // Populate hashset
+let packagesMutuallyDependentWith_nA = nA.PackagesUsed.Using(nA)
+          .Except(hashset) // <-- avoid reporting both A <-> B and B <-> A 
+where packagesMutuallyDependentWith_nA.Count() > 0
+
+from nB in packagesMutuallyDependentWith_nA
+
+// nA and nB are mutually dependent
+// Select first the one that shouldn't use the other.
+// The first package is inferred from the fact that it is using less types of the second.
+let typesOfBUsedByA = nB.ChildTypes.UsedBy(nA)
+let typesOfAUsedByB = nA.ChildTypes.UsedBy(nB)
+let first = (typesOfBUsedByA.Count() > typesOfAUsedByB.Count()) ? nB : nA
+let second = (first == nA) ? nB : nA
+let typesOfFirstUsedBySecond = (first == nA) ? typesOfAUsedByB : typesOfBUsedByA
+let typesOfSecondUsedByFirst = (first == nA) ? typesOfBUsedByA : typesOfAUsedByB
+select new { first, shouldntUse = second, typesOfFirstUsedBySecond, typesOfSecondUsedByFirst }
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid packages dependency cycles</Name>
+warnif count > 0
+// This query lists all application packages dependency cyles.
+// Each row shows a different cycle, prefixed with a package entangled in the cycle.
+//
+// To browse a cycle on the dependency graph or the dependency matrix, just right click
+// a cycle cell and export packages matched to the dependency graph or matrix!
+//
+// In the matrix, dependency cycles are represented with red squares and black cells.
+// To browse easily dependency cycles, the Matrix comes with the option:
+//   --> Display Direct and Indirect Dependencies
+//
+// Read our white books relative to partitionning code, 
+// to know more about packages dependency cycles, and why avoiding them 
+// is a simple but efficient solution to architecture well your code base.
+// http://www.jarchitect.com/WhiteBooks
+
+
+// Optimization: restreint application projects set
+// If some packages are mutually dependent
+//  - They must be declared in the same project
+//  - The parent project must ContainsPackageDependencyCycle
+from project in Application.Projects
+                 .Where(a => a.ContainsPackageDependencyCycle != null && 
+                             a.ContainsPackageDependencyCycle.Value)
+
+// Optimization: restreint packages set
+// A package involved in a cycle necessarily have a null Level.
+let packagesSuspect = project.ChildPackages.Where(n => n.Level == null)
+
+// hashset is used to avoid iterating again on packages already caught in a cycle.
+let hashset = new HashSet<IPackage>()
+
+
+from suspect in packagesSuspect
+   // By commenting this line, the query matches all packages involved in a cycle.
+   where !hashset.Contains(suspect)
+
+   // Define 2 code metrics
+   // - Packages depth of is using indirectly the suspect package.
+   // - Packages depth of is used by the suspect package indirectly.
+   // Note: for direct usage the depth is equal to 1.
+   let packagesUserDepth = packagesSuspect.DepthOfIsUsing(suspect)
+   let packagesUsedDepth = packagesSuspect.DepthOfIsUsedBy(suspect)
+
+   // Select PACKAGES that are both using and used by packageSuspect
+   let usersAndUsed = from n in packagesSuspect where 
+                         packagesUserDepth[n] > 0 && 
+                         packagesUsedDepth[n] > 0 
+                      select n
+
+   where usersAndUsed.Count() > 0
+
+   // Here we've found package(s) both using and used by the suspect package.
+   // A cycle involving the suspect package is found!
+   let cycle = usersAndUsed.Append(suspect)
+
+   // Fill hashset with packages in the cycle.
+   // .ToArray() is needed to force the iterating process.
+   let unused1 = (from n in cycle let unused2 = hashset.Add(n) select n).ToArray()
+
+select new { suspect, cycle }
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Projects with poor cohesion (RelationalCohesion)</Name>
+warnif count > 0 from a in Application.Projects where 
+  a.NbTypes > 20 && // Relational Cohesion metrics is relevant only if there are several types 
+  (a.RelationalCohesion < 1.5 || 
+   a.RelationalCohesion > 4.0)
+select new { a, a.NbTypes, a.RelationalCohesion }
+
+// As classes inside an project should be strongly related, 
+// the cohesion should be high. On the other hand, a value 
+// which is too high may indicate over-coupling. A good range 
+// for RelationalCohesion is 1.5 to 4.0.
+// See the definition of the RelationalCohesion metric here 
+// http://www.jarchitect.com/Metrics#RelationalCohesion]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Projects that don't satisfy the Abstractness/Instability principle</Name>
+warnif percentage > 15 from a in Application.Projects where 
+  a.NormDistFromMainSeq > 0.7 
+  orderby a.NormDistFromMainSeq descending
+select new { a, a.NormDistFromMainSeq }
+
+// See the definition of the NormDistFromMainSeq metric here 
+// http://www.jarchitect.com/Metrics#DitFromMainSeq]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Higher cohesion - lower coupling</Name>
+// It is deemed as a good software architecture practice to clearly separate
+// 'abstract' packages containing only abstractions (interfaces, enumerations, delegates)
+// from other 'concrete' packages, that contains classes
+//
+// Typically, the more concrete packages rely on abstract packages *only*,
+// the more Decoupled is the architecture, and the more Cohesive are 
+// classes inside concrete packages.
+//
+// The following code query, define sets of abstract and concrete packages
+// and shows for each concrete packages, which concrete and abstract packages are used.
+// 
+// This query can be adapted to a rule, depending on how much you want
+// your code architecture being decoupled.
+//
+
+let abstractpackages = JustMyCode.Packages.Where(
+     n2 => n2.ChildTypes.Where(t => !t.IsInterface && !t.IsEnumeration).Count() == 0
+).ToHashSet()
+
+let concretepackages = JustMyCode.Packages.Except(abstractpackages).ToHashSet()
+
+from n in concretepackages
+let packagesUsed = n.PackagesUsed.ExceptThirdParty()
+let concretepackagesUsed = packagesUsed.Except(abstractpackages)
+let abstractpackagesUsed = packagesUsed.Except(concretepackages)
+select new { n, concretepackagesUsed , abstractpackagesUsed }]]></Query>
+    </Group>
+    <Group Name="Plugins" Active="True" ShownInReport="False">
+      <Group Name="PMD Queries" Active="True" ShownInReport="False">
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>All Pmd Violations</Name>
+from issue in Issues  where issue.ToolName=="Pmd"
+select new { issue,issue.FilePath,issue.BeginLine }]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most prioritary Pmd violations</Name>
+(from issue in Issues where issue.ToolName=="Pmd"
+orderby  issue.Priority ascending
+select new { issue,issue.Priority,issue.FilePath,issue.BeginLine }).Take(100)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most Classes violating Pmd rules</Name>
+(from t in Types where t.Issues.Where(i=>i.ToolName=="Pmd").Count()>0
+orderby t.Issues.Count() descending
+select new { t,nbIssues=t.Issues.Count() }).Take(100)
+
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most Methods violating Pmd rules</Name>
+(from m in Methods where m.Issues.Where(i=>i.ToolName=="Pmd").Count()>0
+orderby m.Issues.Count() descending
+select new { m,nbIssues=m.Issues.Count() }).Take(100)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most Project violating Pmd rules</Name>
+(from p in Projects where p.Issues.Where(i=>i.ToolName=="Pmd").Count()>0
+orderby p.Issues.Count() descending
+select new { p,nbIssues=p.Issues.Count() }).Take(5)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most Recurrent Pmd violations</Name>
+let groups = Application.Issues.Where(i=>i.ToolName=="Pmd").GroupBy(t => t.Type)
+
+from g in groups
+orderby g.Count() descending
+select new { issue=g.FirstOrDefault(),count=g.Count() }]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Popular Methods violating Pmd rules</Name>
+(from m in Methods where m.Issues.Where(i=>i.ToolName=="Pmd").Count()>0
+orderby m.MethodsCallingMe.Count() descending
+select new { m,NbCallingMethods= m.MethodsCallingMe }).Take(100)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Popular Classes violating Pmd rules</Name>
+from t in Types where t.Issues.Where(i=>i.ToolName=="Pmd").Count()>0
+orderby t.TypesUsingMe.Count() descending
+select new { t,ClassesUsingMe= t.TypesUsingMe}]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Pmd Violation Famillies with Most violations </Name>
+let groups = Application.Issues.Where(i=>i.ToolName=="Pmd").GroupBy(t => t.IssueFamilly)
+
+from g in groups
+orderby g.Count() descending
+select new { issue=g.FirstOrDefault(),count=g.Count() }]]></Query>
+      </Group>
+      <Group Name="FindBugs Queries" Active="True" ShownInReport="False">
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>All FindBugs Violations</Name>
+from issue in Issues  where issue.ToolName=="FindBugs"
+select new { issue,issue.FilePath,issue.BeginLine }]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most prioritary FindBugs violations</Name>
+(from issue in Issues where issue.ToolName=="FindBugs"
+orderby  issue.Priority ascending
+select new { issue,issue.Priority,issue.FilePath,issue.BeginLine }).Take(100)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most Classes violating FindBugs rules</Name>
+(from t in Types where t.Issues.Where(i=>i.ToolName=="FindBugs").Count()>0
+orderby t.Issues.Count() descending
+select new { t,nbIssues=t.Issues.Count() }).Take(100)
+
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most Methods violating FindBugs rules</Name>
+(from m in Methods where m.Issues.Where(i=>i.ToolName=="FindBugs").Count()>0
+orderby m.Issues.Count() descending
+select new { m,nbIssues=m.Issues.Count() }).Take(100)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most Project violating FindBugs rules</Name>
+(from p in Projects where p.Issues.Where(i=>i.ToolName=="FindBugs").Count()>0
+orderby p.Issues.Count() descending
+select new { p,nbIssues=p.Issues.Count() }).Take(5)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most Recurrent FindBugs violations</Name>
+let groups = Application.Issues.Where(i=>i.ToolName=="FindBugs").GroupBy(t => t.Type)
+
+from g in groups
+orderby g.Count() descending
+select new { issue=g.FirstOrDefault(),count=g.Count() }]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Popular Methods violating FindBugs rules</Name>
+(from m in Methods where m.Issues.Where(i=>i.ToolName=="FindBugs").Count()>0
+orderby m.MethodsCallingMe.Count() descending
+select new { m,NbCallingMethods= m.MethodsCallingMe }).Take(100)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Popular Classes violating FindBugs rules</Name>
+from t in Types where t.Issues.Where(i=>i.ToolName=="FindBugs").Count()>0
+orderby t.TypesUsingMe.Count() descending
+select new { t,ClassesUsingMe= t.TypesUsingMe}]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>FindBugs Violation Famillies with Most violations </Name>
+let groups = Application.Issues.Where(i=>i.ToolName=="FindBugs").GroupBy(t => t.IssueFamilly)
+
+from g in groups
+orderby g.Count() descending
+select new { issue=g.FirstOrDefault(),count=g.Count() }]]></Query>
+      </Group>
+      <Group Name="CheckStyle Queries" Active="True" ShownInReport="False">
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>All CheckStyle Violations</Name>
+from issue in Issues  where issue.ToolName=="CheckStyle"
+select new { issue,issue.FilePath,issue.BeginLine }]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most prioritary CheckStyle violations</Name>
+(from issue in Issues where issue.ToolName=="CheckStyle"
+where issue.Severity=="error"
+select new { issue,issue.Severity,issue.FilePath,issue.BeginLine }).Take(100)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most Classes violating CheckStyle rules</Name>
+(from t in Types where t.Issues.Where(i=>i.ToolName=="CheckStyle").Count()>0
+orderby t.Issues.Count() descending
+select new { t,nbIssues=t.Issues.Count() }).Take(100)
+
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most Project violating CheckStyle rules</Name>
+(from p in Projects where p.Issues.Where(i=>i.ToolName=="CheckStyle").Count()>0
+orderby p.Issues.Count() descending
+select new { p,nbIssues=p.Issues.Count() }).Take(5)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most Recurrent CheckStyle violations</Name>
+let groups = Application.Issues.Where(i=>i.ToolName=="CheckStyle").GroupBy(t => t.Type)
+
+from g in groups
+orderby g.Count() descending
+select new { issue=g.FirstOrDefault(),count=g.Count() }]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Popular Classes violating CheckStyle rules</Name>
+from t in Types where t.Issues.Where(i=>i.ToolName=="CheckStyle").Count()>0
+orderby t.TypesUsingMe.Count() descending
+select new { t,ClassesUsingMe= t.TypesUsingMe}]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>CheckStyle Violation Famillies with Most violations </Name>
+let groups = Application.Issues.Where(i=>i.ToolName=="CheckStyle").GroupBy(t => t.IssueFamilly)
+
+from g in groups
+orderby g.Count() descending
+select new { issue=g.FirstOrDefault(),count=g.Count() }]]></Query>
+      </Group>
+      <Group Name="CPD Queries" Active="True" ShownInReport="False">
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>All CPD duplications</Name>
+from issue in Issues  where issue.ToolName=="CPD"
+select new { issue,issue.FilePath,issue.BeginLine }]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most duplicated code lines</Name>
+from issue in Issues  where issue.ToolName=="CPD"
+orderby issue.NbDuplicationCopies descending
+select new { issue,issue.NbDuplicationCopies }]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Big duplications</Name>
+from issue in Issues  where issue.ToolName=="CPD"
+orderby issue.NbLinesCopied descending
+select new { issue,issue.NbLinesCopied }]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Classes containing big duplication</Name>
+(from t in Types where t.Issues.Where(i=>i.ToolName=="CPD" && i.NbLinesCopied>100).Count()>0
+orderby t.Issues.Count() descending
+select new { t }).Take(100)
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Classes containing Many duplications</Name>
+(from t in Types where t.Issues.Where(i=>i.ToolName=="CPD" && i.NbDuplicationCopies>10).Count()>0
+orderby t.Issues.Count() descending
+select new { t }).Take(100)]]></Query>
+      </Group>
+    </Group>
+    <Group Name="Best Practices" Active="True" ShownInReport="False">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Avoid creating unnecessary strings</Name>
+warnif count > 0 from m in Methods 
+let depth0 = m.DepthOfCreateA("java.lang.String".AllowNoMatch())
+where depth0  == 1
+select new { m, depth0 }
+
+//String s = new String("stringette"); // DON'T DO THIS!
+//The statement creates a new String instance each time it is executed, and
+//none of those object creations is necessary. The argument to the String constructor ("stringette") is itself a String instance,
+//functionally identical to all of the objects created by the constructor. If this usage occurs in a loop or in a frequently
+//invoked method, millions of String instances can be created needlessly.
+//The improved version is simply the following:
+// String s = "stringette";
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Avoid finalizers</Name>
+warnif count > 0 from m in Methods where m.Name =="finalize()"
+select  m
+
+//Don’t use finalizers except as a safety net or to terminate noncritical native resources. 
+//In those rare instances where you do use a finalizer,remember to invoke super.finalize. 
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Prefer primitive types to boxed primitives</Name>
+warnif count > 0 
+
+let BoxedTypes = ThirdParty.Types.WithFullNameIn(
+   "java.lang.Integer",
+   "java.lang.Double",
+   "java.lang.Boolean")
+
+from m in Application.Methods.UsingAny(BoxedTypes)
+select m
+
+//Use primitives in preference to boxed primitives whenever you
+//have the choice. Primitive types are simpler and faster. If you must use boxed
+//primitives, be careful! Autoboxing reduces the verbosity, but not the danger, of
+//using boxed primitives. When your program compares two boxed primitives
+//with the == operator, it does an identity comparison, which is almost certainly not
+//what you want.
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Always override hashcode when you override equals</Name>
+warnif count > 0 
+from t in Types where !t.IsThirdParty && t.Methods.Where(a=>a.Name=="equals(Object)").Count()>0
+&& t.Methods.Where(a=>a.Name=="hashCode()").Count()==0
+select t
+
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Always override toString</Name>
+warnif count > 0 
+from t in Types where !t.IsThirdParty &&  t.IsClass && t.Methods.Where(a=>a.Name=="toString()").Count()==0
+select t
+
+//While java.lang.Object provides an implementation of the toString method,
+//the string that it returns is generally not what the user of your class wants to see. I
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Prefer interfaces to abstract classes</Name>
+warnif count > 0 
+from t in Types where !t.IsThirdParty &&  t.IsAbstract
+select t
+
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Use interfaces only to define types</Name>
+warnif count > 0 
+from t in Types where !t.IsThirdParty &&  t.IsInterface && t.NbMethods==0
+select t
+
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Avoid using raw types</Name>
+warnif count > 0 
+
+let rawTypes = ThirdParty.Types.WithFullNameIn(
+  "java.util.Collection")
+
+from m in Application.Methods.UsingAny(rawTypes)
+select m
+
+
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Don't force gabrage collector</Name>
+warnif count > 0 from m in Methods where m.IsUsing ("java.lang.System.gc()".AllowNoMatch())
+select new { m, m.NbBCInstructions }
+
+
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Do not raise generic exception</Name>
+warnif count > 0  from m in Methods 
+let depth0 = m.DepthOfCreateA("java.lang.Exception".AllowNoMatch())
+where depth0  == 1
+select new { m, depth0 }
+
+
+
+]]></Query>
+      <Query Active="False" DisplayList="False" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Caution with List.Contains()</Name>
+let containsMethods = ThirdParty.Methods.WithFullNameIn(
+   "java.util.List<E>.contains(Object)",
+   "java.util.ArrayList<E>.contains(Object)")
+from m in Application.Methods.UsingAny(containsMethods) 
+select m
+
+// The cost of checking if a list contains an 
+// object is proportional to the size of the list 
+// (O(N) operation). For large lists and/or frequent 
+// calls to Contains(), prefer using the 
+// System.Collections.Generic.HashSet<T> class 
+// where calls to Contains() takes a constant 
+// time (O(0) operation).]]></Query>
+      <Query Active="False" DisplayList="False" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Prefer return collection abstraction instead of implementation</Name>
+let implTypes = ThirdParty.Types.WithFullNameIn(
+   "java.util.HashMap<K,V>",
+   "java.util.Dictionary<K,V>",
+   "java.util.ArrayList<E>",
+   "java.util.HashSet<E>")
+
+from m in Application.Methods.WithReturnTypeIn(implTypes) 
+select new { m, m.ReturnType }
+
+// Most of the time, clients of a method doesn't 
+// need to know the exact implementation of the 
+// collection returned. It is preferrable to return 
+// a collection interface such as IList<T>, 
+// ICollection<T> or IEnumerable<T>.]]></Query>
+    </Group>
+    <Group Name="API Breaking Changes" Active="True" ShownInReport="True">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>API Breaking Changes: Types</Name>
+// This rule warns if a publicly visible type is 
+// not publicly visible anymore or if it has been removed.
+// Such type can break the code of your clients.
+
+warnif count > 0 from t in codeBase.OlderVersion().Application.Types
+where t.IsPubliclyVisible && 
+
+     // The type has been removed and its parent project hasn't been removed ...
+     ( (t.WasRemoved() && !t.ParentProject.WasRemoved()) ||
+
+     // ... or the type is not publicly visible anymore
+       !t.WasRemoved() && !t.NewerVersion().IsPubliclyVisible)
+
+select new { t,
+             NewVisibility = (t.WasRemoved() ? " " : t.NewerVersion().Visibility.ToString()) }
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>API Breaking Changes: Methods</Name>
+// This rule warns if a publicly visible method is 
+// not publicly visible anymore or if it has been removed.
+// Such method can break the code of your clients.
+
+warnif count > 0 from m in codeBase.OlderVersion().Application.Methods
+where m.IsPubliclyVisible && 
+
+     // The method has been removed and its parent type hasn't been removed ...
+     ( (m.WasRemoved() && !m.ParentType.WasRemoved()) ||
+
+     // ... or the method is not publicly visible anymore
+       !m.WasRemoved() && !m.NewerVersion().IsPubliclyVisible)
+
+select new { m,
+             NewVisibility = (m.WasRemoved() ? " " : m.NewerVersion().Visibility.ToString()) }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>API Breaking Changes: Fields</Name>
+// This rule warns if a publicly visible field is 
+// not publicly visible anymore or if it has been removed.
+// Such field can break the code of your clients.
+
+warnif count > 0 from f in codeBase.OlderVersion().Application.Fields
+where f.IsPubliclyVisible &&
+
+     // The field has been removed and its parent type hasn't been removed ...
+     ( (f.WasRemoved() && !f.ParentType.WasRemoved()) ||
+
+     // ... or the field is not publicly visible anymore
+       !f.WasRemoved() && !f.NewerVersion().IsPubliclyVisible)
+
+select new { f,
+             NewVisibility = (f.WasRemoved() ? " " : f.NewerVersion().Visibility.ToString()) }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>API Breaking Changes: Interfaces and Abstract Classes</Name>
+// This rule warns if a publicly visible interface or abstract class 
+// has been changed and contains new abstract methods or 
+// if some abstract methods have been removed.
+// This can break the code of clients 
+// that implement such interface or derive from such abstract class.
+
+warnif count > 0 from tNewer in Application.Types where 
+ (tNewer.IsInterface || tNewer.IsClass && tNewer.IsAbstract) && 
+  tNewer.IsPubliclyVisible && 
+  tNewer.IsPresentInBothBuilds()
+
+let tOlder = tNewer.OlderVersion() where tOlder.IsPubliclyVisible
+
+let methodsRemoved = tOlder.Methods.Where(m => m.IsAbstract && m.WasRemoved())
+let methodsAdded = tNewer.Methods.Where(m2 => m2.IsAbstract && m2.WasAdded())
+
+where methodsAdded.Count() > 0 || methodsRemoved.Count() > 0
+select new { tNewer, methodsAdded, methodsRemoved }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="True"><![CDATA[// <Name>Avoid transforming immutable types into mutable types</Name>
+
+// Immutability is a strong property on a type.
+// Breaking immutability can result in serious problem for an algorithm consummer
+// that has been written taking account of the type immutability.
+
+// To visualize changes in code, right-click a matched type and select:
+//  - Compare older and newer versions of source file
+//  - Compare older and newer versions disassembled with Reflector
+
+warnif count > 0 
+from t in Application.Types where
+  t.IsPresentInBothBuilds() &&
+ !t.IsStatic &&
+ !t.IsImmutable && 
+  t.OlderVersion().IsImmutable
+
+let mutableFields = from f in t.InstanceFields where !f.IsImmutable select f
+
+select new { t, mutableFields }
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>API: New publicly visible types</Name>
+// List types that are new in the public surface of your projects
+
+from t in Application.Types
+where t.IsPubliclyVisible && 
+
+     // The type has been removed and its parent project hasn't been removed ...
+     ( (t.WasAdded() && !t.ParentProject.WasAdded()) ||
+
+     // ... or the type existed but was not publicly visible
+       !t.WasAdded() && !t.OlderVersion().IsPubliclyVisible)
+
+select new { t,
+             OldVisibility = (t.WasAdded() ? " " : t.OlderVersion().Visibility.ToString()) }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>API: New publicly visible methods</Name>
+// List methods that are new in the public surface of your projects
+
+from m in Application.Methods
+where m.IsPubliclyVisible && 
+
+     // The method has been removed and its parent project hasn'm been removed ...
+     ( (m.WasAdded() && !m.ParentType.WasAdded()) ||
+
+     // ... or the t existed but was not publicly visible
+       !m.WasAdded() && !m.OlderVersion().IsPubliclyVisible)
+
+select new { m,
+             OldVisibility = (m.WasAdded() ? " " : m.OlderVersion().Visibility.ToString()) }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>API: New publicly visible fields</Name>
+// List fields that are new in the public surface of your projects
+
+from f in Application.Fields
+where f.IsPubliclyVisible && 
+
+     // The method has been removed and its parent project hasn'f been removed ...
+     ( (f.WasAdded() && !f.ParentType.WasAdded()) ||
+
+     // ... or the t existed but was not publicly visible
+       !f.WasAdded() && !f.OlderVersion().IsPubliclyVisible)
+
+select new { f,
+             OldVisibility = (f.WasAdded() ? " " : f.OlderVersion().Visibility.ToString()) }]]></Query>
+    </Group>
+    <Group Name="Code Diff Summary" Active="True" ShownInReport="True">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>New projects</Name>
+from a in Application.Projects where a.WasAdded()
+select new { a, a.NbLinesOfCode }
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Projects removed</Name>
+from a in codeBase.OlderVersion().Application.Projects where a.WasRemoved()
+select new { a, a.NbLinesOfCode }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Projects where code was changed</Name>
+from a in Application.Projects where a.CodeWasChanged()
+select new { a, a.NbLinesOfCode, 
+             oldNbLinesOfCode = a.OlderVersion().NbLinesOfCode.GetValueOrDefault() ,
+             delta = (int) a.NbLinesOfCode.GetValueOrDefault() - a.OlderVersion().NbLinesOfCode.GetValueOrDefault() }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>New packages</Name>
+from n in Application.Packages where 
+ !n.ParentProject.WasAdded() &&
+  n.WasAdded()
+select new { n, n.NbLinesOfCode }
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Packages removed</Name>
+from n in codeBase.OlderVersion().Application.Packages where 
+ !n.ParentProject.WasRemoved() &&
+  n.WasRemoved()
+select new { n, n.NbLinesOfCode }
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Packages where code was changed</Name>
+from n in Application.Packages where n.CodeWasChanged()
+select new { n, n.NbLinesOfCode, 
+             oldNbLinesOfCode = n.OlderVersion().NbLinesOfCode.GetValueOrDefault() ,
+             delta = (int) n.NbLinesOfCode.GetValueOrDefault() - n.OlderVersion().NbLinesOfCode.GetValueOrDefault() }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>New types</Name>
+from t in Application.Types where 
+ !t.ParentPackage.WasAdded() &&
+  t.WasAdded()
+select new { t, t.NbLinesOfCode }
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Types removed</Name>
+from t in codeBase.OlderVersion().Application.Types where 
+ !t.ParentPackage.WasRemoved() &&
+  t.WasRemoved()
+select new { t, t.NbLinesOfCode }
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Types where code was changed</Name>
+// To visualize changes in code, right-click a matched type and select:
+//  - Compare older and newer versions of source file
+//  - Compare older and newer versions disassembled with Reflector
+
+from t in Application.Types where t.CodeWasChanged() 
+//select new { t, t.NbLinesOfCode }
+select new { t, t.NbLinesOfCode, 
+             oldNbLinesOfCode = t.OlderVersion().NbLinesOfCode ,
+             delta = (int?) t.NbLinesOfCode - t.OlderVersion().NbLinesOfCode } 
+/*from t in Application.Types where t.CodeWasChanged() && t.IsPresentInBothBuild
+select new { t, t.NbLinesOfCode, 
+             oldNbLinesOfCode = t.OlderVersion().NbLinesOfCode ,
+             delta = (int) t.NbLinesOfCode - t.OlderVersion().NbLinesOfCode }*/]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Heuristic to find types moved from one package or project to another</Name>
+let typesRemoved = codeBase.OlderVersion().Types.Where(t => t.WasRemoved())
+let typesAdded = Types.Where(t2 => t2.WasAdded())
+
+from tMoved in typesAdded.Join(
+   typesRemoved,
+   t3 => t3.Name,
+   t4 => t4.Name,
+   (tNewer, tOlder) => new { tNewer, 
+                             OlderParentpackage = tOlder.ParentPackage,
+                             OlderParentproject = tOlder.ParentProject  } ) 
+select tMoved]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Types directly using one or several types changed</Name>
+let typesChanged = Application.Types.Where(t2 => t2.CodeWasChanged()).ToHashSet()
+
+from t in JustMyCode.Types.UsingAny(typesChanged) where
+  !t.CodeWasChanged() && 
+  !t.WasAdded()
+let typesChangedUsed = t.TypesUsed.Intersect(typesChanged) 
+select new { t, typesChangedUsed }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Types indirectly using one or several types changed</Name>
+let typesChanged = Application.Types.Where(t2 => t2.CodeWasChanged()).ToHashSet()
+
+// 'depth' represents a code metric defined on types using
+// directly or indirectly any type where code was changed.
+let depth = JustMyCode.Types.DepthOfIsUsingAny(typesChanged) 
+
+from t in depth.DefinitionDomain where
+  !t.CodeWasChanged() && 
+  !t.WasAdded()
+
+let typesChangedDirectlyUsed = t.TypesUsed.Intersect(typesChanged) 
+let depthOfUsingTypesChanged = depth[t]
+orderby depthOfUsingTypesChanged 
+
+select new { t, depthOfUsingTypesChanged, typesChangedDirectlyUsed }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>New methods</Name>
+from m in Application.Methods where 
+ !m.ParentType.WasAdded() &&
+  m.WasAdded()
+select new { m, m.NbLinesOfCode }
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Methods removed</Name>
+from m in codeBase.OlderVersion().Application.Methods where 
+ !m.ParentType.WasRemoved() &&
+  m.WasRemoved()
+select new { m, m.NbLinesOfCode }
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Methods where code was changed</Name>
+// To visualize changes in code, right-click a matched method and select:
+//  - Compare older and newer versions of source file
+//  - Compare older and newer versions disassembled with Reflector
+
+from m in Application.Methods where m.CodeWasChanged()
+select new { m, m.NbLinesOfCode, 
+             oldNbLinesOfCode = m.OlderVersion().NbLinesOfCode ,
+             delta = (int?) m.NbLinesOfCode - m.OlderVersion().NbLinesOfCode }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Methods directly calling one or several methods changed</Name>
+let methodsChanged = Application.Methods.Where(m2 => m2.CodeWasChanged()).ToHashSet()
+
+from m in JustMyCode.Methods.UsingAny(methodsChanged ) where
+  !m.CodeWasChanged() && 
+  !m.WasAdded()
+let methodsChangedCalled = m.MethodsCalled.Intersect(methodsChanged) 
+select new { m, methodsChangedCalled }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Methods indirectly calling one or several methods changed</Name>
+let methodsChanged = Application.Methods.Where(m2 => m2.CodeWasChanged()).ToHashSet()
+
+// 'depth' represents a code metric defined on methods using
+// directly or indirectly any method where code was changed.
+let depth = JustMyCode.Methods.DepthOfIsUsingAny(methodsChanged) 
+
+from m in depth.DefinitionDomain where
+  !m.CodeWasChanged() && 
+  !m.WasAdded()
+
+let methodsChangedDirectlyUsed = m.MethodsCalled.Intersect(methodsChanged) 
+let depthOfUsingMethodsChanged = depth[m]
+orderby depthOfUsingMethodsChanged 
+
+select new { m, depthOfUsingMethodsChanged, methodsChangedDirectlyUsed }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>New fields</Name>
+from f in Application.Fields where 
+ !f.ParentType.WasAdded() &&
+  f.WasAdded()
+select new { f }
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Fields removed</Name>
+from f in codeBase.OlderVersion().Application.Fields where 
+ !f.ParentType.WasRemoved() &&
+  f.WasRemoved()
+select new { f }
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Third party types that were not used and that are now used</Name>
+from t in ThirdParty.Types where t.IsUsedRecently()
+select new { t, t.Methods, t.Fields, t.TypesUsingMe }
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Third party types that were used and that are not used anymore</Name>
+from t in codeBase.OlderVersion().Types where t.IsNotUsedAnymore()
+select new { t, t.Methods, t.Fields, TypesThatUsedMe = t.TypesUsingMe }
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Third party methods that were not used and that are now used</Name>
+from m in ThirdParty.Methods where 
+  m.IsUsedRecently() &&
+ !m.ParentType.IsUsedRecently()
+select new { m, m.MethodsCallingMe }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Third party methods that were used and that are not used anymore</Name>
+from m in codeBase.OlderVersion().Methods where 
+  m.IsNotUsedAnymore() &&
+ !m.ParentType.IsNotUsedAnymore()
+select new { m, MethodsThatCalledMe = m.MethodsCallingMe}]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Third party fields that were not used and that are now used</Name>
+from f in ThirdParty.Fields where 
+  f.IsUsedRecently() &&
+ !f.ParentType.IsUsedRecently()
+select new { f, f.MethodsUsingMe }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Third party fields that were used and that are not used anymore</Name>
+from f in codeBase.OlderVersion().Fields where 
+  f.IsNotUsedAnymore() &&
+ !f.ParentType.IsNotUsedAnymore()
+select new { f, MethodsThatUsedMe = f.MethodsUsingMe }]]></Query>
+    </Group>
+    <Group Name="Test and Code Coverage" Active="False" ShownInReport="True">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>C.R.A.P method code metric</Name>
+// Change Risk Analyzer and Predictor (i.e. CRAP) code metric
+// This code metric helps in pinpointing overly complex and untested code.
+// Reference: http://www.artima.com/weblogs/viewpost.jsp?thread=215899
+// Formula:   CRAP(m) = comp(m)^2 * (1 – cov(m)/100)^3 + comp(m)
+warnif count > 0
+from m in JustMyCode.Methods
+
+// Don't match too short methods
+where m.NbLinesOfCode > 10
+
+let CC = m.CyclomaticComplexity
+let uncov = (100 - m.PercentageCoverage) / 100f
+let CRAP = (CC * CC * uncov * uncov * uncov) + CC
+where CRAP != null && CRAP > 30
+orderby CRAP descending, m.NbLinesOfCode descending
+select new { m, CRAP, CC, uncoveredPercentage = uncov*100, m.NbLinesOfCode }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Complex methods partially covered by tests should be 100% covered</Name>
+warnif count > 0 from m in JustMyCode.Methods 
+ where 
+     // These metrics' definitions are available here: 
+     // http://www.jarchitect.com/Metrics#MetricsOnMethods
+     (  m.NbLinesOfCode > 30 || 
+        m.BCCyclomaticComplexity > 50 || 
+        m.BCNestingDepth > 4 || 
+        m.NbVariables > 8) && 
+
+     // Take care only of complex methods 
+     // already partially covered, but not completely covered.
+     m.PercentageCoverage > 0 &&
+     m.PercentageCoverage < 100
+
+  orderby m.NbLinesOfCodeNotCovered ascending,
+          m.NbLinesOfCode descending
+select new { m, m.PercentageCoverage, m.NbLinesOfCode, 
+             m.NbLinesOfCodeCovered, m.NbLinesOfCodeNotCovered, 
+             m.BCCyclomaticComplexity, m.BCNestingDepth, m.NbVariables }  ]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Method changed poorly covered</Name>
+from m in Application.Methods where 
+  m.PercentageCoverage < 30 && 
+  m.CodeWasChanged() 
+  orderby m.NbLinesOfCode descending, 
+           m.NbLinesOfCodeNotCovered ,
+           m.PercentageCoverage
+select new { m, m.PercentageCoverage, m.NbLinesOfCode, 
+             m.NbLinesOfCodeNotCovered }  
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Method added poorly covered</Name>
+from m in Application.Methods where
+  m.NbLinesOfCode > 0 &&
+  m.PercentageCoverage < 30 && 
+  m.WasAdded() 
+  orderby m.NbLinesOfCode descending, 
+           m.NbLinesOfCodeNotCovered ,
+           m.PercentageCoverage
+select new { m, m.PercentageCoverage, m.NbLinesOfCode, 
+             m.NbLinesOfCodeNotCovered } 
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Types 95% to 99% covered</Name>
+from t in Application.Types where 
+  t.PercentageCoverage >= 95 && 
+  t.PercentageCoverage <= 99 &&
+ !t.IsGeneratedByCompiler
+
+  let methodsCulprit = t.Methods.Where(m => m.PercentageCoverage < 100)
+
+  orderby t.NbLinesOfCode descending , 
+           t.NbLinesOfCodeNotCovered ,
+           t.PercentageCoverage
+select new { t, t.PercentageCoverage, t.NbLinesOfCode, 
+             t.NbLinesOfCodeNotCovered, methodsCulprit } 
+
+// Having types 100% covered by tests is a good idea because 
+// the small portion of code hard to cover, is also the 
+// portion of code that is the most likely to contain bugs.
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Packages 95% to 99% covered</Name>
+from n in Application.Packages where 
+  n.PercentageCoverage >= 95 && 
+  n.PercentageCoverage <= 99 
+
+  let methodsCulprit = n.ChildMethods.Where(m => m.PercentageCoverage < 100)
+
+  orderby n.NbLinesOfCode descending , 
+           n.NbLinesOfCodeNotCovered ,
+           n.PercentageCoverage
+select new { n, n.PercentageCoverage, n.NbLinesOfCode, 
+             n.NbLinesOfCodeNotCovered, methodsCulprit  } 
+
+// Having types 100% covered by tests is a good idea because 
+// the small portion of code hard to cover, is also the 
+// portion of code that is the most likely to contain bugs.]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Types not covered at all</Name>
+from t in Application.Types where 
+  t.PercentageCoverage == 0
+  orderby t.NbLinesOfCode descending
+select new { t, t.NbLinesOfCode } 
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Packages not covered at all</Name>
+from n in Application.Packages where 
+  n.PercentageCoverage == 0
+  orderby n.NbLinesOfCode descending
+select new { n, n.NbLinesOfCode} 
+]]></Query>
+    </Group>
+    <Group Name="Dead Code" Active="True" ShownInReport="True">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Potentially dead Types</Name>
+warnif count > 0
+// Filter procedure for types that should'nt be considered as dead
+let canTypeBeConsideredAsDeadProc = new Func<IType, bool>(
+   t2 => !t2.IsPublic && //   Public types might be used by client applications of your projects.
+         t2.Name != "Program" && 
+        !t2.IsGeneratedByCompiler 
+        )
+
+// Select types unused
+let typesUnused = 
+   from t4 in JustMyCode.Types where
+   t4.NbTypesUsingMe == 0 && canTypeBeConsideredAsDeadProc(t4)
+   select t4
+
+// Dead types = types used only by unused types (recursive)
+let deadTypesMetric = typesUnused.FillIterative(
+types => from t3 in codeBase.Application.Types.UsedByAny(types).Except(types)
+         where canTypeBeConsideredAsDeadProc(t3) &&
+               t3.TypesUsingMe.Intersect(types).Count() == t3.NbTypesUsingMe
+         select t3)
+
+from t in deadTypesMetric.DefinitionDomain
+select new { t, t.TypesUsingMe, depth = deadTypesMetric[t] }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Potentially dead Methods</Name>
+warnif count > 0
+// Filter procedure for methods that should'nt be considered as dead
+let canMethodBeConsideredAsDeadProc = new Func<IMethod, bool>(
+    m => !m.IsPubliclyVisible &&       // Public methods might be used by client applications of your projects.
+         !m.IsEntryPoint &&            // Main() method is not used by-design.
+         !m.IsClassConstructor &&      // The BC code never explicitely calls class constructors.
+         !(m.IsConstructor &&          // Don't take account of protected ctor that might be call by a derived ctors.
+           m.IsProtected) &&
+         !m.IsGeneratedByCompiler)
+
+// Get methods unused
+let methodsUnused = 
+   from m2 in JustMyCode.Methods where 
+   m2.NbMethodsCallingMe == 0 && 
+   canMethodBeConsideredAsDeadProc(m2)
+   select m2
+
+// Dead methods = methods used only by unused methods (recursive)
+let deadMethodsMetric = methodsUnused.FillIterative(
+   methods => // Unique loop, just to let a chance to build the hashset.
+              from o in (new object()).ToEnumerable()
+              // Use a hashet to make Intersect calls much faster!
+              let hashset = methods.ToHashSet()
+              from m3 in codeBase.Application.Methods.UsedByAny(methods).Except(methods)
+              where canMethodBeConsideredAsDeadProc(m3) &&
+                    // Select methods called only by methods already considered as dead
+                    hashset.Intersect(m3.MethodsCallingMe).Count() == m3.NbMethodsCallingMe
+              select m3)
+
+from m4 in JustMyCode.Methods.Intersect(deadMethodsMetric.DefinitionDomain)
+select new { m4, m4.MethodsCallingMe, depth = deadMethodsMetric[m4] }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Potentially dead Fields</Name>
+warnif count > 0
+from f in JustMyCode.Fields where
+   f.NbMethodsUsingMe == 0 && 
+   !f.IsPublic &&     // Although not recommended, public fields might be used by client applications of your projects.
+   !f.IsLiteral &&    // The BC code never explicitely uses literal fields.
+   !f.IsEnumValue  && // The BC code never explicitely uses enumeration value.
+   f.Name!= "serialVersionUID" &&
+   !f.IsInitOnly
+    
+   
+select f]]></Query>
+    </Group>
+    <Group Name="Visibility" Active="True" ShownInReport="False">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Methods that could have a lower visibility</Name>
+warnif count > 0 from m in JustMyCode.Methods where 
+  m.Visibility != m.OptimalVisibility &&
+  // Eliminate default constructor from the result.
+  // Whatever the visibility of the declaring class,
+  // default constructors are public and introduce noise
+  // in the current rule.
+  !( m.IsConstructor && m.IsPublic && m.NbParameters == 0) &&
+
+  // Don't decrease the visibility of Main() methods.
+  !m.IsEntryPoint
+
+select new { m, 
+             m.Visibility , 
+             CouldBeDeclared = m.OptimalVisibility,
+             m.MethodsCallingMe }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Fields that could have a lower visibility</Name>
+warnif count > 0 from f in JustMyCode.Fields where 
+  f.Visibility != f.OptimalVisibility
+  
+  select new { f, 
+             f.Visibility , 
+             CouldBeDeclared = f.OptimalVisibility,
+             f.MethodsUsingMe }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Fields should be declared as private</Name>
+warnif count > 0 from f in Application.Fields where 
+ !f.IsPrivate && 
+
+ // These conditions filter cases where fields 
+ // doesn't represent state that should be encapsulated. 
+ !f.IsGeneratedByCompiler && 
+ !f.IsSpecialName && 
+ !f.IsInitOnly && 
+ !f.IsLiteral && 
+ !f.IsEnumValue
+select new { f, f.SizeOfInst }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Constructors of abstract classes should be declared as protected or private</Name>
+// Constructors of an abstract class can only be accessed from this class and derived class.
+// Declaring such a constructor with another visibility level is useless and potentially misleading.
+
+warnif count > 0
+from t in Application.Types where 
+  t.IsClass && 
+  t.IsAbstract
+let ctors = t.Constructors.Where(c => !c.IsProtected && !c.IsPrivate)
+where ctors.Count() > 0
+select new { t, ctors }
+
+// Notice that if a constructor of an abstract class is declared as private,
+// it can only be accessed from derived classes nested in the abstract class.]]></Query>
+    </Group>
+    <Group Name="Purity - Immutability - Side-Effects" Active="True" ShownInReport="False">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Fields should be marked as ReadOnly when possible</Name>
+warnif count > 0 
+from f in JustMyCode.Fields where 
+   f.IsImmutable && 
+  !f.IsInitOnly &&
+  !f.IsGeneratedByCompiler 
+select new { f, f.SizeOfInst } 
+
+// A field that matches the condition IsImmutable 
+// is a field that is assigned only by constructors 
+// of its class.
+// For an instance field, this means its value 
+// will remain constant throught the lifetime 
+// of the object.
+// For a static field, this means its value will 
+// remain constant throught the lifetime of the 
+// program.
+// In both cases, such field can safely be marked 
+
+
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Property Getters should be immutable</Name>
+warnif count > 0 from m in Application.Methods where
+  m.IsPropertyGetter &&
+  ( ( !m.IsStatic && m.ChangesObjectState) ||
+    (  m.IsStatic && m.ChangesTypeState) )
+
+let fieldsAssigned = m.FieldsAssigned
+
+select new { m, m.NbLinesOfCode, fieldsAssigned  }
+
+// This rule might be violated in the case of object lazy initialized
+// when the property getter is accessed the first time.
+// But in general, the callers of a property 
+// doesn't expect to change any state through the call.
+    ]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid static fields with a mutable field type</Name>
+warnif count > 0
+from f in Application.Fields
+where f.IsStatic && !f.IsEnumValue && !f.IsGeneratedByCompiler && !f.IsLiteral
+let fieldType = f.FieldType
+where fieldType != null && 
+     !fieldType.IsThirdParty && 
+     !fieldType.IsInterface && 
+     !fieldType.IsImmutable
+select new { f, 
+             mutableFieldType = fieldType , 
+             isFieldImmutable = f.IsImmutable, 
+             isFieldIsReadOnly = f.IsInitOnly }
+
+// As explained in this blog post
+// http://codebetter.com/patricksmacchia/2011/05/04/back-to-basics-usage-of-static-members
+// static fields should be used to hold only constant and immutable states.
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>A field must not be assigned from outside its parent hierarchy types</Name>
+warnif count > 0
+from f in JustMyCode.Fields.Where(f => 
+      !f.IsPrivate && !f.IsGeneratedByCompiler && 
+      !f.IsImmutable && !f.IsEnumValue)
+
+let methodsAssignerOutsideOfMyType = f.MethodsAssigningMe.Where(
+        m =>!m.IsGeneratedByCompiler &&
+             m.ParentType != f.ParentType && 
+            !m.ParentType.DeriveFrom(f.ParentType) )
+
+where methodsAssignerOutsideOfMyType.Count() > 0
+select new { f, methodsAssignerOutsideOfMyType }]]></Query>
+    </Group>
+    <Group Name="Naming Conventions" Active="True" ShownInReport="False">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Instance fields should begin with a lower character </Name>
+warnif count > 0 from f in Application.Fields where 
+  !f.NameLike (@"^[a-z]")  && 
+  !f.IsStatic && 
+  !f.IsLiteral && 
+  !f.IsGeneratedByCompiler  && 
+  !f.IsSpecialName 
+select new { f, f.SizeOfInst } 
+
+// This naming convention provokes debate.
+// Don't hesitate to customize the regex of 
+// NameLike to your preference.]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Interface name should begin with an Upper character</Name>
+warnif count > 0 from t in Application.Types where 
+t.IsInterface  &&
+!t.SimpleNameLike (@"^[A-Z]")
+select t
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Exception class name should be suffixed with 'Exception'</Name>
+warnif count > 0 from t in Application.Types where 
+  t.IsExceptionClass && 
+  !t.NameLike (@"Exception$")
+select new { t, t.NbLinesOfCode }
+
+// The name of an exception class should end with 'Exception'.]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Types name should begin with an Upper character</Name>
+warnif count > 0 from t in JustMyCode.Types where 
+  // The name of a type should begin with an Upper letter.
+  !t.SimpleNameLike (@"^[A-Z]") &&     
+
+  // Except if it is generated by compiler or ...
+  !t.IsSpecialName &&
+  !t.IsGeneratedByCompiler
+
+
+select new { t, t.NbLinesOfCode }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Methods name should begin with an lower character</Name>
+warnif count > 0 from m in JustMyCode.Methods where 
+  !m.NameLike (@"^[a-z]") && 
+  !m.IsSpecialName && 
+  !m.IsGeneratedByCompiler && !m.IsConstructor
+select m
+
+// The name of a regular method should 
+// begin with an Upper letter.]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid types with name too long</Name>
+warnif count > 0 from t in Application.Types 
+where !t.IsGeneratedByCompiler
+
+where t.SimpleName.Length > 35 
+select new { t, t.SimpleName }
+
+      ]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid methods with name too long</Name>
+warnif count > 0 from m in Application.Methods where 
+  !m.IsGeneratedByCompiler &&
+ ((!m.IsSpecialName && m.SimpleName.Length > 35) ||
+   // Property getter/setter are prefixed with "get_" "set_" of length 4.
+  ( m.IsSpecialName && m.SimpleName.Length - 4 > 35))
+
+select new { m, m.SimpleName }
+
+// The regex matches methods with name longer 
+// than 35 characters.
+// Method Name doesn't contain the type and package 
+// prefix, FullName does.
+// The regex computes the method name length from 
+// the beginning until the first open parenthesis 
+// or first lower than (for generic methods).
+// Explicit Interface Implementation methods are 
+// discarded because their names are prefixed 
+// with the interface name.
+      ]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid fields with name too long</Name>
+warnif count > 0 from f in Application.Fields where
+ !f.IsGeneratedByCompiler &&
+  f.Name.Length > 35
+select f
+
+// The regex matches fields with name longer 
+// than 35 characters.
+// Field Name doesn't contain the type and 
+// package prefix, FullName does.
+      ]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid prefixing type name with parent package name</Name>
+
+// For example a type named "RuntimeEnvironment"
+// declared in a package named "Foo.Runtime"
+// should be named "Environment"
+
+from n in Application.Packages where n.Name.Length > 0
+from t in n.ChildTypes
+where 
+ !t.IsGeneratedByCompiler &&
+ !t.IsNested &&
+  t.Name.IndexOf(n.SimpleName) == 0
+select new { t, packageName = n.SimpleName }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid naming types and packages with the same identifier</Name>
+
+// Not only this can provoke compiler resolution collision,
+// but also, this makes code less maintainable because
+// concepts are not concisely identified.
+
+warnif count > 0
+let hashsetShortNames = Packages.Where(n => n.Name.Length > 0).Select(n2 => n2.SimpleName).ToHashSet()
+
+from t in JustMyCode.Types
+where hashsetShortNames.Contains(t.Name)
+select new { t, packages = Packages.Where(n3 => n3.SimpleName == t.Name) }]]></Query>
+    </Group>
+    <Group Name="Source Files Organization" Active="True" ShownInReport="False">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Avoid defining multiple types in a source file</Name>
+warnif count > 0 
+
+// Build a lookup indexed by source files, values being a sequence of types defined in the source file.
+let lookup = Application.Types.Where(t => 
+                                t.SourceFileDeclAvailable && 
+                               // except nested types and types generated by compilers!
+                               !t.IsGeneratedByCompiler &&                               
+                               !t.IsNested)                                
+                         // It could make sense to not apply this rule for enumerations.
+                         // && !t.IsEnumeration)
+
+            // We use multi-key, since a type can be declared in multiple source files.
+           .ToMultiKeyLookup(t2 => t2.SourceDecls.Select(d => d.SourceFile))
+ 
+from @group in lookup where @group.Count() > 1
+   let sourceFile = @group.Key
+
+   // CQLinq doesn't let indexing result with sourceFile 
+   // so we choose a typeIndex in types, 
+   // preferably the type that has the file name.
+   let typeWithSourceFileName = @group.FirstOrDefault(t3 => t3.SimpleName == sourceFile.FileNameWithoutExtension)
+   let typeIndex = typeWithSourceFileName ?? @group.First()
+
+select new { typeIndex, 
+             types = @group as IEnumerable<IType>, 
+             sourceFile.FilePathString }]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>package name should correspond to file location</Name>
+
+// For a good code organization, 
+// do mirror the packages hierarchy and the source files directories tree.
+
+warnif count > 0
+from n in Application.Packages 
+
+// Replace dots by spaces in package name
+let dirCorresponding = n.Name.Replace('.', ' ')
+
+// Look at source file decl of JustMyCode type's declared in n
+from t in n.ChildTypes
+where JustMyCode.Contains(t) && t.SourceFileDeclAvailable
+from decl in t.SourceDecls
+let sourceFilePath = decl.SourceFile.FilePath.ToString()
+
+// Replace dots and path separators by spaces in source files names
+where !sourceFilePath.Replace('.',' ').Replace('\\',' ').Contains(dirCorresponding)
+
+select new { t, dirCorresponding , sourceFilePath  } ]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Types with source files stored in the same directory, should be declared in the same package</Name>
+warnif count > 0 
+
+// Group JustMyCode types in a lookup 
+// where groups are keyed with directories that contain the types' source file(s).
+// Note that a type can be contained in several groups 
+// if it is declared in several source files stored in different directories.
+let lookup = JustMyCode.Types.Where(t => t.SourceFileDeclAvailable)
+            .ToMultiKeyLookup(
+               t => t.SourceDecls.Select(
+                          decl => decl.SourceFile.FilePath.ParentDirectoryPath).Distinct()
+            )
+
+
+from groupOfTypes in lookup
+let parentpackages = groupOfTypes.ParentPackages()
+
+// Select group of types (with source files stored in the same directory) ...
+// ... but contained in several packages
+where parentpackages.Count() > 1
+
+// mainpackages is the package that contains many types 
+// declared in the directory groupOfTypes .key
+let mainpackage  = groupOfTypes
+                     .ToLookup(t2 => t2.ParentPackage)
+                     .OrderByDescending(g => g.Count()).First().Key
+
+// Select types with source files stored in the same directory,
+// but contained in packages different than mainpackage.
+let typesOutOfMainpackage = groupOfTypes
+                              .Where(t3 => t3.ParentPackage != mainpackage )
+
+                               // Filter types declared on several source files that contain generated methods 
+                               // because typically such type contains one or several partial definitions generated.
+                               // These partially generated types would be false positive for the present rule.
+                               .Where(t4 => t4.SourceDecls.Count() == 1 ||
+                                           t4.Methods.Count(m => JustMyCode.Contains(m)) == 0)
+where typesOutOfMainpackage.Count() > 0
+
+select new { mainpackage, 
+
+             // Typically a type in typesOutOfMainpackage ...
+             // 1) ... is contained in the wrong package but its source file(s) is stored in the right directory.
+             //      --> In such situation the type should be contained in mainpackage.
+             // 2) ... is contained in the right package but its source file(s) is stored in the wrong directory
+             //      --> In such situation the source file of type must be moved to the parent package directory.
+             // 3) ... is declared in multiple source files, stored in different directories.
+             //      --> It would be preferable that all source files are stored in a single directory.
+             typesOutOfMainpackage   }
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Types declared in the same package, should have their source files stored in the same directory</Name>
+warnif count > 0 
+from @package in Application.Packages
+
+// Group types of @package in a lookup 
+// where groups are keyed with directories that contain the types' source file(s).
+// Note that a type can be contained in several groups 
+// if it is declared in several source files stored in different directories.
+let lookup = @package.ChildTypes.Where(t => t.SourceFileDeclAvailable && JustMyCode.Contains(t))
+            .ToMultiKeyLookup(
+               t => t.SourceDecls.Select(
+                          decl => decl.SourceFile.FilePath.ParentDirectoryPath).Distinct()
+            )
+
+// Are types of @packages declared in more than one directory?
+where lookup.Count > 1
+
+// Infer the main directory, preferably the one that has the same name as the package.
+let dirs = lookup.Select(types => types.Key)
+let mainDirNullable = dirs.Where(d => d.DirectoryName == @package.SimpleName).FirstOrDefault()
+let mainDir = mainDirNullable ?? dirs.First()
+
+// Types declared out of mainDir, are types in group of types declared in a directory different than mainDir!
+let typesDeclaredOutOfMainDir = lookup.Where(types => types.Key != mainDir)
+                                .SelectMany(types => types)
+                                
+                                // Filter types declared on several source files that contain generated methods 
+                                // because typically such type contains one or several partial definitions generated.
+                                // These partially generated types would be false positive for the present rule.
+                                .Where(t2 => t2.SourceDecls.Count() == 1 ||
+                                            t2.Methods.Count(m => JustMyCode.Contains(m)) == 0)
+
+where typesDeclaredOutOfMainDir.Count() > 0
+
+select new { @package, 
+
+             // Typically a type in typesDeclaredOutOfMainDir ...
+             // 1) ... is contained in the wrong package but its source file(s) is stored in the right directory.
+             //      --> In such situation the type parent package should be the package corresponding to the directory.
+             // 2) ... is contained in the right package but its source file(s) is stored in the wrong directory
+             //      --> In such situation the type source file should be moved to mainDir.
+             // 3) ... is declared in multiple source files, stored in different directories.
+             //      --> It would be preferable that all source files are stored in a single directory.
+             typesDeclaredOutOfMainDir , 
+
+             mainDir = mainDir.ToString() }]]></Query>
+    </Group>
+    <Group Name="Trend Metrics" Active="True" ShownInReport="False">
+      <Group Name="Code Size" Active="True" ShownInReport="False">
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Lines of Code" Unit="LoC" />  
+Application.Projects.Sum(a => a.NbLinesOfCode)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Lines of Code (JustMyCode)" Unit="LoC" />
+JustMyCode.Methods.Sum(m => m.NbLinesOfCode)
+
+// JustMyCode is defined by code queries prefixed with 'notmycode' 
+// in the group 'Defining JustMyCode'.
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Lines of Code (NotMyCode)" Unit="LoC" />
+Application.Methods.Where(m => !JustMyCode.Contains(m))
+                   .Sum(m => m.NbLinesOfCode)
+
+// JustMyCode is defined by code queries prefixed with 'notmycode' 
+// in the group 'Defining JustMyCode'.
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Lines of Code Added since the Baseline" Unit="LoC" />  
+( from a in Application.Projects
+  let nbLocAdded = a.IsPresentInBothBuilds() ? 
+                   a.NbLinesOfCode - (int)a.OlderVersion().NbLinesOfCode :
+                   a.NbLinesOfCode
+  select nbLocAdded)
+.Sum(loc => loc)
+
+// A value is computed by this Trend Metric query
+// only if a Baseline for Comparison is provided.
+// See Project Properties > Analysis > Baseline for Comparison
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# BC Instructions" Unit="BC Instructions" />
+Application.Projects.Sum(a => a.NbBCInstructions)
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# BC Instructions (NotMyCode)" Unit="BC Instructions" />
+Application.Methods.Where(m => !JustMyCode.Contains(m))
+                   .Sum(m => m.NbBCInstructions)
+
+// JustMyCode is defined by code queries prefixed with 'notmycode' 
+// in the group 'Defining JustMyCode'.
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Source Files" Unit="Source Files" />
+Application.Projects.SelectMany(
+  a => a.SourceDecls.Select(sd => sd.SourceFile.FilePathString.ToLower()))
+.Distinct()
+.Count()
+
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Lines of Comments" Unit="Lines" />  
+Application.Projects.Sum(a => a.NbLinesOfComment)
+
+// So far comments are only extracted from C# source code.
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Projects" Unit="Projects" />
+Application.Projects.Count()
+
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Packages" Unit="PACKAGES" />
+Application.Packages.Count()]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Types" Unit="Types" />
+Application.Types.Count()]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Public Types" Unit="Types" />
+Application.Types.Where(t => t.IsPubliclyVisible).Count()]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Classes" Unit="Types" />
+Application.Types.Count(t => t.IsClass && !t.IsGeneratedByCompiler)
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Abstract Classes" Unit="Types" />
+Application.Types.Count(t => t.IsClass && t.IsAbstract)
+
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Interfaces" Unit="Types" />
+Application.Types.Count(t => t.IsInterface)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Methods" Unit="Methods" />
+Application.Methods.Count(m => !m.IsGeneratedByCompiler)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Abstract Methods" Unit="Methods" />
+Application.Methods.Count(m => m.IsAbstract)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Concrete Methods" Unit="Methods" />
+Application.Methods.Count(m => !m.IsAbstract && !m.IsGeneratedByCompiler)
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Fields" Unit="Fields" />
+Application.Fields.Count(f => 
+   !f.IsEnumValue && 
+   !f.IsGeneratedByCompiler && 
+   !f.IsLiteral &&
+   !f.ParentType.IsEnumeration)
+
+]]></Query>
+      </Group>
+      <Group Name="Maximum and Average" Active="True" ShownInReport="False">
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Max # Lines of Code for Methods (JustMyCode)" Unit="LoC" />
+JustMyCode.Methods
+          .Max(m => m.NbLinesOfCode)
+          .ToEnumerable().Sum(loc => loc)
+
+// Here is the code query to get the (JustMyCode) method with largest # Lines of Code
+// JustMyCode.Methods.OrderByDescending(m => m.NbLinesOfCode).Take(1).Select(m => new {m, m.NbLinesOfCode})
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Average # Lines of Code for Methods" Unit="LoC" />
+Application.Methods.Where(m => m.NbLinesOfCode > 0)
+                   .Average(m => m.NbLinesOfCode)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Average # Lines of Code for Methods with at least 3 Lines of Code" Unit="LoC" />
+Application.Methods.Where(m => m.NbLinesOfCode >= 3)
+                   .Average(m => m.NbLinesOfCode)
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Max # Lines of Code for Types (JustMyCode)" Unit="LoC" />
+JustMyCode.Types
+          .Max(t => t.NbLinesOfCode)
+          .ToEnumerable().Sum(loc => loc)
+
+// Here is the code query to get the (JustMyCode) type with largest # Lines of Code
+// JustMyCode.Types.OrderByDescending(t => t.NbLinesOfCode).Take(1).Select(t => new {t, t.NbLinesOfCode})
+
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Average # Lines of Code for Types" Unit="LoC" />
+Application.Types.Where(t => t.NbLinesOfCode > 0)
+                 .Average(t => t.NbLinesOfCode)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Max Cyclomatic Complexity for Methods" Unit="Paths" />
+Application.Methods
+          .Max(m => m.CyclomaticComplexity)
+          .ToEnumerable().Sum(loc => loc)
+
+// Here is the code query to get the most complex method, according to Cyclomatic Complexity
+// Application.Methods.OrderByDescending(m => m.CyclomaticComplexity).Take(1).Select(m => new {m, m.CyclomaticComplexity})
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Average Cyclomatic Complexity for Methods" Unit="Paths" />
+Application.Methods.Where(m => m.NbLinesOfCode> 0)
+                   .Average(m => m.CyclomaticComplexity)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Max BC Cyclomatic Complexity for Methods" Unit="Paths" />
+Application.Methods
+          .Max(m => m.BCCyclomaticComplexity)
+          .ToEnumerable().Sum(loc => loc)
+
+// Here is the code query to get the most complex method, according to Cyclomatic Complexity computed from IL code.
+// Application.Methods.OrderByDescending(m => m.BCCyclomaticComplexity).Take(1).Select(m => new {m, m.CyclomaticComplexity})
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Average BC Cyclomatic Complexity for Methods" Unit="Paths" />
+Application.Methods.Where(m => m.NbBCInstructions> 0)
+                   .Average(m => m.BCCyclomaticComplexity)
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Max BC Nesting Depth for Methods" Unit="Scopes" />
+Application.Methods
+          .Max(m => m.BCNestingDepth)
+          .ToEnumerable().Sum(loc => loc)
+
+// Here is the code query to get the method with highest BCNestingDepth.
+// Application.Methods.OrderByDescending(m => m.BCNestingDepth).Take(1).Select(m => new {m, m.BCNestingDepth})
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Average BC Nesting Depth for Methods" Unit="Scopes" />
+Application.Methods.Where(m => m.NbBCInstructions> 0)
+                   .Average(m => m.BCNestingDepth)
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Max # of Methods for Types" Unit="Methods" />
+Application.Types
+           .Max(t => t.NbMethods) 
+           .ToEnumerable().Sum(loc => loc)
+
+// Here is the code query to get the (JustMyCode) type with largest # of Methods
+// JustMyCode.Types.OrderByDescending(t => t.NbMethods).Take(1).Select(t => new {t, t.Methods})
+
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Average # Methods for Types" Unit="Methods" />
+Application.Types.Average(t => t.NbMethods)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Max # of Methods for Interfaces" Unit="Methods" />
+Application.Types.Where(t => t.IsInterface)
+           .Max(t => t.NbMethods) 
+           .ToEnumerable().Sum(loc => loc)
+
+// Here is the code query to get the (JustMyCode) type with largest # of Methods
+// JustMyCode.Types.OrderByDescending(t => t.NbMethods).Take(1).Select(t => new {t, t.Methods})]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Average # Methods for Interfaces" Unit="Methods" />
+JustMyCode.Types.Where(t => t.IsInterface)
+                .Average(t => t.NbMethods)
+]]></Query>
+      </Group>
+      <Group Name="Code Coverage" Active="True" ShownInReport="False">
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Percentage Code Coverage" Unit="%" />
+((float)Application.Projects.Sum(a => a.NbLinesOfCodeCovered) /
+        Application.Projects.Sum(a => a.NbLinesOfCode)
+ * 100f)
+.ToEnumerable().Sum()
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Lines of Code Covered" Unit="LoC" />
+Application.Projects.Sum(a => a.NbLinesOfCodeCovered)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Lines of Code Not Covered" Unit="LoC" />
+Application.Projects.Sum(a => a.NbLinesOfCodeNotCovered)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Lines of Code in Types 100% Covered" Unit="LoC" />
+Application.Types.Where(t => t.PercentageCoverage == 100)
+           .Sum(t => t.NbLinesOfCodeCovered)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Lines of Code in Methods 100% Covered" Unit="LoC" />
+Application.Methods.Where(m => m.PercentageCoverage == 100)
+           .Sum(m => m.NbLinesOfCodeCovered)]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Max C.R.A.P Score" />
+// Change Risk Analyzer and Predictor (i.e. CRAP) code metric
+// This code metric helps in pinpointing overly complex and untested code.
+// Reference: http://www.artima.com/weblogs/viewpost.jsp?thread=215899
+// Formula:   CRAP(m) = comp(m)^2 * (1 - cov(m)/100)^3 + comp(m)
+
+(from m in JustMyCode.Methods
+
+// Don't match too short methods
+where m.NbLinesOfCode > 10
+
+let CC = m.CyclomaticComplexity
+let uncov = (100 - m.PercentageCoverage) / 100f
+let CRAP = (CC * CC * uncov * uncov * uncov) + CC
+where CRAP != null && CRAP > 30 select CRAP)
+.Max(CRAP => CRAP)
+
+// To list methods with highest C.R.A.P scores, please refer to the default rule:
+//   Test and Code Coverage > C.R.A.P method code metric
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="Average C.R.A.P Score" />
+// Change Risk Analyzer and Predictor (i.e. CRAP) code metric
+// This code metric helps in pinpointing overly complex and untested code.
+// Reference: http://www.artima.com/weblogs/viewpost.jsp?thread=215899
+// Formula:   CRAP(m) = comp(m)^2 * (1 - cov(m)/100)^3 + comp(m)
+
+(from m in JustMyCode.Methods
+
+// Don't match too short methods
+where m.NbLinesOfCode > 10
+
+let CC = m.CyclomaticComplexity
+let uncov = (100 - m.PercentageCoverage) / 100f
+let CRAP = (CC * CC * uncov * uncov * uncov) + CC
+where CRAP != null && CRAP > 30 select CRAP)
+.Average(CRAP => CRAP)
+
+// To list methods with highest C.R.A.P scores, please refer to the default rule:
+//   Test and Code Coverage > C.R.A.P method code metric
+]]></Query>
+      </Group>
+      <Group Name="Third-Party Usage" Active="True" ShownInReport="False">
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Third-Party Projects Used" Unit="Projects" />
+ThirdParty.Projects.Count()]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Third-Party Packages Used" Unit="Packages" />
+ThirdParty.Packages.Count()]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Third-Party Types Used" Unit="Types" />
+ThirdParty.Types.Count()]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Third-Party Methods Used" Unit="Methods" />
+ThirdParty.Methods.Count()]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <TrendMetric Name="# Third-Party Fields Used" Unit="Fields" />
+ThirdParty.Fields.Count()]]></Query>
+      </Group>
+    </Group>
+    <Group Name="Defining JustMyCode" Active="True" ShownInReport="False">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Discard methods in a directory  from JustMyCode</Name>
+notmycode from m in Methods.Where(a=>a.SourceDecls.FirstOrDefault()!=null && a.SourceDecls.FirstOrDefault().SourceFile.DirectoryPath.Contains("path to exclude"))
+select m
+
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Discard types in a directory  from JustMyCode</Name>
+notmycode from t in Types.Where(a=>a.SourceDecls.FirstOrDefault()!=null && a.SourceDecls.FirstOrDefault().SourceFile.DirectoryPath.Contains("path to exclude"))
+select t
+
+]]></Query>
+    </Group>
+    <Group Name="Statistics" Active="False" ShownInReport="False">
+      <Query Active="True" DisplayList="False" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most used types (Rank)</Name>
+(from t in Application.Types orderby t.Rank descending
+ select new { t, t.Rank }).Take(50)
+
+// TypeRank values are computed by applying 
+// the Google PageRank  algorithm on the 
+// graph of types' dependencies. Types with 
+// high Rank are the most used ones.
+// See the definition of the TypeRank metric here: 
+// http://www.jarchitect.com/Metrics#TypeRank]]></Query>
+      <Query Active="True" DisplayList="False" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most used methods (Rank)</Name>
+(from m in Application.Methods orderby m.Rank descending
+ select new { m, m.Rank }).Take(50)
+
+// MethodRank values are computed by applying 
+// the Google PageRank  algorithm on the graph of 
+// methods' dependencies. Methods with high Rank 
+// are the most used ones. See the definition of 
+// the MethodRank metric here:
+// http://www.jarchitect.com/Metrics#MethodRank]]></Query>
+      <Query Active="True" DisplayList="False" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most used packages (#PackagesUsingMe )</Name>
+(from n in Packages orderby n.NbPackagesUsingMe descending
+ select new { n, n.PackagesUsingMe }).Take(50)]]></Query>
+      <Query Active="True" DisplayList="False" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most used types (#TypesUsingMe )</Name>
+(from t in Types orderby t.NbTypesUsingMe descending
+ select new { t, t.TypesUsingMe }).Take(50)]]></Query>
+      <Query Active="True" DisplayList="False" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Most used methods (#MethodsCallingMe )</Name>
+(from m in Methods orderby m.NbMethodsCallingMe descending
+ select new { m, m.MethodsCallingMe }).Take(50)]]></Query>
+      <Query Active="True" DisplayList="False" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Packages that use many other packages (#PackagesUsed )</Name>
+(from n in Application.Packages orderby n.NbPackagesUsed descending
+ select new { n, n.PackagesUsed }).Take(50)]]></Query>
+      <Query Active="True" DisplayList="False" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Types that use many other types (#TypesUsed )</Name>
+(from t in Application.Types orderby t.NbTypesUsed descending
+ select new { t, t.TypesUsed }).Take(50)]]></Query>
+      <Query Active="True" DisplayList="False" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Methods that use many other methods (#MethodsCalled )</Name>
+(from m in Application.Methods orderby m.NbMethodsCalled descending
+ select new { m, m.MethodsCalled }).Take(50)]]></Query>
+      <Query Active="True" DisplayList="False" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>High-level to low-level projects (Level)</Name>
+from a in Application.Projects orderby a.Level descending
+select new { a, a.Level }
+
+// Classify projects by their Level values.
+// See the definition of the ProjectLevel metric here:
+// http://www.jarchitect.com/Metrics#Level]]></Query>
+      <Query Active="True" DisplayList="False" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>High-level to low-level packages (Level)</Name>
+from n in Application.Packages orderby n.Level descending
+select new { n, n.Level }
+
+// Classify packages by their Level values.
+// See the definition of the PackageLevel metric here:
+// http://www.jarchitect.com/Metrics#Level]]></Query>
+      <Query Active="True" DisplayList="False" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>High-level to low-level types (Level)</Name>
+from t in Application.Types orderby t.Level descending
+select new { t, t.Level }
+
+// Classify types by their Level values.
+// See the definition of the TypeLevel metric here:
+// http://www.jarchitect.com/Metrics#Level]]></Query>
+      <Query Active="True" DisplayList="False" DisplayStat="False" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>High-level to low-level methods (Level)</Name>
+from m in Application.Methods orderby m.Level descending
+select new { m, m.Level }
+
+// Classify methods by their Level values.
+// See the definition of the MethodLevel metric here:
+// http://www.jarchitect.com/Metrics#Level]]></Query>
+    </Group>
+    <Group Name="Samples of Custom rules" Active="False" ShownInReport="False">
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Check that the project Prj1 is not using the project Prj2</Name>
+warnif count > 0 from a in Application.Projects where 
+  a.IsUsing ("Prj2".AllowNoMatch().MatchProject()) &&
+  (a.Name == @"Prj1")
+select a
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Check that the package N1.N2 is not using the package N3.N4.N5</Name>
+warnif count > 0 from n in Application.Packages where 
+  n.IsUsing ("N3.N4.N5".AllowNoMatch().MatchProject()) &&
+  (n.Name == @"N1.N2")
+select n
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Check that the project Prj1 is only using the projects Prj2, Prj3</Name>
+warnif count > 0 from a in Application.Projects where 
+  ( !a.IsUsing ("Prj2".AllowNoMatch().MatchProject()) ||
+    !a.IsUsing ("Prj3".AllowNoMatch().MatchProject()) ||
+     a.ProjectsUsed.Count() != 3) // Must not be used more than 3 projects 
+&& 
+  (a.Name == @"Prj1")
+select new { a, a.ProjectsUsed }
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Check that all methods that call Foo.Fct1() also call Foo.Fct2(Int32)</Name>
+warnif count > 0 from m in Application.Methods where 
+   m.IsUsing ("Foo.Fct1()".AllowNoMatch()) &&
+  !m.IsUsing ("Foo.Fct2(Int32)".AllowNoMatch())
+select m
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Check that all types that derive from Foo, also implement IFoo</Name>
+warnif count > 0 from t in Application.Types where 
+   t.DeriveFrom ("Foo".AllowNoMatch().MatchType()) &&
+  !t.Implement ("IFoo".AllowNoMatch().MatchType())
+select t
+]]></Query>
+      <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Check that all types that has the attribute FooAttribute are declared in the package N1.N2*</Name>
+warnif count > 0 from t in 
+  Application.Packages.WithNameWildcardMatchNotIn("N1.N2*").ChildTypes() 
+  where 
+    t.HasAnnotation ("FooAttribute".AllowNoMatch())
+select t]]></Query>
+      <Group Name="Check Coverage on particular Code Elements" Active="False" ShownInReport="False">
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Check that the project Asm is 100% covered by tests</Name>
+warnif count > 0 from a in Application.Projects where 
+  (a.Name == @"Asm") && 
+   a.PercentageCoverage < 100
+select new { a, a.PercentageCoverage }
+
+
+// To run this rule properly coverage data 
+// must be gathered from Cobertura
+// This can be done throught the menu: 
+//   JArchitect -> Coverage -> Import Coverage Files
+// This can be done at analysis time throught the menu: 
+// Project Properties -> Analysis -> Code Coverage
+// More information on how to import coverage data here:
+// http://www.jarchitect.com/Coverage
+
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Check that the package N1.N2 is 100% covered by tests</Name>
+warnif count > 0 from n in Application.Packages where 
+  (n.Name == @"N1.N2") && 
+   n.PercentageCoverage < 100
+select new { n, n.PercentageCoverage }
+
+
+// To run this rule properly coverage data 
+// must be gathered from Cobertura
+// This can be done throught the menu: 
+//   JArchitect -> Coverage -> Import Coverage Files
+// This can be done at analysis time throught the menu: 
+// Project Properties -> Analysis -> Code Coverage
+// More information on how to import coverage data here:
+// http://www.jarchitect.com/Coverage
+
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Check that the class package.Foo is 100% covered by tests</Name>
+warnif count > 0 from t in Application.Types where 
+  (t.FullName == @"package.Foo") && 
+   t.PercentageCoverage < 100
+select new { t, t.PercentageCoverage }
+
+
+// To run this rule properly coverage data 
+// must be gathered from Cobertura
+// This can be done throught the menu: 
+//   JArchitect -> Coverage -> Import Coverage Files
+// This can be done at analysis time throught the menu: 
+// Project Properties -> Analysis -> Code Coverage
+// More information on how to import coverage data here:
+// http://www.jarchitect.com/Coverage
+
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Check that the class package.Foo.Method(Int32) is 100% covered by tests</Name>
+warnif count > 0 from t in Application.Types where 
+  (t.FullName == @"package.Foo.Method(Int32)") && 
+   t.PercentageCoverage < 100
+select new { t, t.PercentageCoverage }
+
+
+// To run this rule properly coverage data 
+// must be gathered from Cobertura
+// This can be done throught the menu: 
+//   JArchitect -> Coverage -> Import Coverage Files
+// This can be done at analysis time throught the menu: 
+// Project Properties -> Analysis -> Code Coverage
+// More information on how to import coverage data here:
+// http://www.jarchitect.com/Coverage
+
+]]></Query>
+      </Group>
+      <Group Name="Custom Naming Conventions" Active="False" ShownInReport="False">
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Check that all types that derive from Foo, has a name that ends up with Foo</Name>
+warnif count > 0 from t in Application.Types where 
+   t.DeriveFrom ("Foo".AllowNoMatch().MatchType()) &&
+  !t.NameLike (@"Foo$")
+select new { t, t.NbLinesOfCode }
+]]></Query>
+        <Query Active="True" DisplayList="True" DisplayStat="True" DisplaySelectionView="False" IsCriticalRule="False"><![CDATA[// <Name>Check that all packages begins with CompanyName.ProductName</Name>
+warnif count > 0 from n in Application.Packages where 
+  !n.NameLike (@"^CompanyName.ProductName")
+select new { n, n.NbLinesOfCode } ]]></Query>
+      </Group>
+    </Group>
+  </Queries></NDepend>

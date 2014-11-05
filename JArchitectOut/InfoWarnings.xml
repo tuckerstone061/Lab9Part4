@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<InfoWarnings>
+  <Info>11/05/2014 13:57:39 Begin full analysis with JArchitect v4.0.0.8041</Info>
+  <Info>No Baseline for Comparison loaded.</Info>
+  <Info>Bytecode parsing</Info>
+  <Info>Third Party parsing</Info>
+  <Info>Parsing Source Files</Info>
+  <Warning>Source code info won't be available : Some code metrics like CyclomaticComplexity,Comments,NBLineofCode won't be available.
+Source files directories could be added in the project properties panel</Warning>
+  <Info>No dependency cycle detected in assemblies referencement graph.</Info>
+  <Info>11/05/2014 13:57:41 Analyse dependencies of your application.</Info>
+  <Info>11/05/2014 13:57:41 Building the report (standard).</Info>
+  <Info>11/05/2014 13:57:42 Log trend metrics values.</Info>
+  <Info>11/05/2014 13:57:42 Execute queries and rules</Info>
+  <Warning>3 critical rules are violated.
+  - Prefer primitive types to boxed primitives
+  - Always override toString
+  - Avoid using raw types</Warning>
+</InfoWarnings>
